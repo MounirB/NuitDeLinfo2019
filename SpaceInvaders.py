@@ -136,22 +136,14 @@ def EffacerScore():
         canvas.delete(afficherScore[i])
         i+=1
 
+
 # La fonction ci-dessous permet
 # d'animer le canon mobile selon
 # la direction choisie par le joueur
-
 def move(dx):
     global game
-
     if game.student.lives != 0 and not game.paused:
-   
         game.student.x += dx
-
-
-        # Si on arrive au bord de l'écran
-        # le canon mobile se retrouve bloqué
-        # afin de ne pas aller plus loin :p
-        
         if game.student.x <= X_LIMIT[0]:
             game.student.x = X_LIMIT[0]
         elif game.student.x >= X_LIMIT[1]:
@@ -166,27 +158,27 @@ def move(dx):
 def launch_enemy_missile():
     global game
     if not game.paused and  game.start and game.enemies:
+        root.after(1000, launch_enemy_missile)
         # Choose enemy that fires missil
         enemy = game.enemies[random.randint(0, len(game.enemies)-1)]
         game.enemies_missile.append(EnemyMissile(enemy.x, enemy.y))
         animate_enemies_missile()
-    root.after(1000, launch_enemy_missile)
         
 
 # Cette fonction permet d'animer l'obus tiré
 # par un ennemi
 def animate_enemies_missile():
     global game
-    if not game.paused:
-        for missil in game.enemies_missile:
-            missil.move()
+    if game.enemies_missile:
+        for missile in game.enemies_missile:
+            missile.move()
 
             # Si un tir ennemi parvient à son objectif en
             # touchant le canon mobile du joueur ben il crève ==> partie terminée !! :p
-            if missil.x >= game.student.x and missil.x <= game.student.x+60 and \
-                    missil.y >= game.student.y:
+            if missile.x >= game.student.x and missile.x <= game.student.x+60 and \
+                    missile.y >= game.student.y:
                 game.student.explod()
-                missil.explod()
+                missile.explod()
 
                 # Diminution du capital de vies
                 # du joueur
@@ -207,8 +199,6 @@ def animate_enemies_missile():
                     # On vérifie le score
                     SaveMeilleurScore(game.score)
 
-        root.after(50, animate_enemies_missile)
-
 
 # Cette fonction va permettre d'afficher un
 # paysage post-apocalyptique si le joueur
@@ -217,15 +207,6 @@ def image():
     global photo
     photo=PhotoImage(file='apocalypse.gif')
     canvas.create_image(320, 240, image=photo)
-    
-
-# Cette fonction permet de ressuciter
-# le défunt joueur \o/ Amen !! XD
-def res_student():
-    global game
-    if not game.paused:
-        game.student.revive()
-    
 
     
 # Cette fonction va permettre de gérer le tir du canon
@@ -235,8 +216,8 @@ def launch_missile(event):
     global game
     if game.start:
         if not game.paused:
-            game.missile = Missile(game.student.x, game.student.y - 20)
-            if game.missile.fired:
+            game.missiles.append(Missile(game.student.x, game.student.y - 20))
+            if game.missiles:
                 time.sleep(0.09)
                 animate_missile()
 
@@ -245,26 +226,23 @@ def launch_missile(event):
 # le canon mobile
 def animate_missile():
     global game
-
-    if not game.paused and (game.missile is not None) and (not game.stop_animations):
-        if game.missile.fired:
-            game.missile.move()
+    if game.missiles:
+        for missile in game.missiles:
+            missile.move()
 
             for enemy in game.enemies:
-                if game.missile.x+5 >= enemy.x and game.missile.x-5 <= enemy.x+60:
-                    if game.missile.y+5 >= enemy.y and game.missile.y-5 <= enemy.y+60:
-                        game.score += 50
-                        game.missile.explod()
-                        AffichageScore.configure(text="Score : "+str(game.score), font=('Fixedsys',16))
-                        # score(50, enemy.x, enemy.y, 30, 20)
-                        enemy.explod()
-                        game.enemies.remove(enemy)
+                if missile.x+5 >= enemy.x and missile.x-5 <= enemy.x+60 and\
+                        missile.y+5 >= enemy.y and missile.y-5 <= enemy.y+60:
+                    game.score += 50
+                    missile.explod()
+                    AffichageScore.configure(text="Score : "+str(game.score), font=('Fixedsys',16))
+                    # score(50, enemy.x, enemy.y, 30, 20)
+                    enemy.explod()
+                    game.enemies.remove(enemy)
 
             # if no more enemies
             if not game.enemies:
-               game.init_board()
-            else:
-                root.after(50, animate_missile)
+                game.init_board()
     
 
 # Les deux fonctions ci-dessous permettent
@@ -281,6 +259,14 @@ def left(event):
     if game.start:
         if not game.paused:
             move(-20)
+
+
+def main_animation():
+    global game
+    if game.stat and not game.stop_animations:
+        animate_enemies_missile()
+        animate_missile()
+        root.after(50, main_animation())
 
 
 # Cette fonction permet d'effectuer une pause en cours de partie
@@ -301,7 +287,7 @@ class Student:
     """
     def __init__(self):
         self.x = X_LIMIT[0] + X_LIMIT[1]//2
-        self.y = Y_LIMIT[1] - 5
+        self.y = Y_LIMIT[1] - 15
         self.body = canvas.create_rectangle(self.x, self.y, self.x + 20, self.y + 20, fill='green')
         self.lives = 3
 
@@ -352,12 +338,12 @@ class Missile:
         self.x = x
         self.y = y
         self.body = canvas.create_oval(self.x, self.y, self.x + 20, self.y + 20, fill='yellow')
-        self.fired = True
         self.dy = MISSILE_DY
 
     def explod(self):
-        self.fired = 0
+        global game
         canvas.delete(self.body)
+        game.missiles.remove(self)
 
     def move(self):
         self.y -= self.dy
@@ -382,7 +368,6 @@ class EnemyMissile:
 
     def explod(self):
         global game
-        self.fired = 0
         canvas.delete(self.body)
         game.enemies_missile.remove(self)
 
@@ -407,7 +392,7 @@ class Game:
         self.stop_animations = False
         self.score = 0
         self.student = Student()
-        self.missile = None
+        self.missiles = []
         self.enemies = []
         self.enemies_missile = []
         self.paused = False
@@ -430,15 +415,14 @@ class Game:
 
         self.start = True
         self.paused = False
-        root.after(200, launch_enemy_missile())
+        root.after(1000, launch_enemy_missile())
 
     def stop_animation(self):
         self.stop_animations = True
 
     def launch_animation(self):
         self.stop_animations = False
-        animate_missile()
-        animate_enemies_missile()
+        main_animation()
 
     def pause_pressed(self):
         if self.paused:

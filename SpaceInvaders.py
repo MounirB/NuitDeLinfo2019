@@ -1,12 +1,10 @@
-# -*- coding: cp1252 -*-
-
-###################################
-#                                 #
-#  Programme : Space invaders     #
-#  Auteur : Shakan972             #
-#  Date de creation : 13/04/07    #
-#                                 #
-###################################
+#####################################
+#                                   #
+#  Programme : University invaders  #
+#  Auteur : Les 3 Mousquethesards   #
+#  Date de creation : 06/12/19      #
+#                                   #
+#####################################
 
 
 ##########################################
@@ -42,7 +40,7 @@ def EcranDePresentation():
 def Titre():
     global game
     if not game.start:
-        canvas.create_text(320, 240, font=('Fixedsys', 24), text="SPACE INVADERS", fill='blue')
+        canvas.create_text(320, 240, font=('Fixedsys', 24), text="UNIVERSITY INVADERS", fill='blue')
         root.after(2000, Titre2)
 
 
@@ -50,7 +48,7 @@ def Titre():
 def Titre2():
     global game
     if not game.start:
-        canvas.create_text(320, 270, font=('Freshbot', 18), text="By Shakan972", fill='red')
+        canvas.create_text(320, 270, font=('Freshbot', 18), text="By Les 3 Mousquethesards", fill='red')
         root.after(3000, LoadMeilleurScore)
 
 

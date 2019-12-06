@@ -9,7 +9,7 @@
 
 ##########################################
 #                                        #
-# Importations des fonctions nécessaires #
+# Importations des fonctions necessaires #
 #                                        #
 ##########################################
 
@@ -21,12 +21,12 @@ import pickle
 
 ############################
 #                          #
-# Définition des fonctions #
+# Definition des fonctions #
 #                          #
 ############################
 
 
-# Cette fonction affiche l'écran de présentation du jeu
+# Cette fonction affiche l'ecran de presentation du jeu
 def EcranDePresentation():
     global game
     if not game.start:
@@ -36,19 +36,19 @@ def EcranDePresentation():
         root.after(1500, Titre)
 
 
-# On afficher le nom du jeu à l'écran
+# On afficher le nom du jeu a l'ecran
 def Titre():
     global game
     if not game.start:
-        canvas.create_text(320, 240, font=('Fixedsys', 24), text="UNIVERSITY INVADERS", fill='blue')
+        canvas.create_text(260, 240, font=('Fixedsys', 24), text="UNIVERSITY INVADERS", fill='blue')
         root.after(2000, Titre2)
 
 
-# On affiche le nom de l'auteur ( It's me !! :p )
+# On affiche le nom des auteurs
 def Titre2():
     global game
     if not game.start:
-        canvas.create_text(320, 270, font=('Freshbot', 18), text="By Les 3 Mousquethesards", fill='red')
+        canvas.create_text(280, 270, font=('Freshbot', 18), text="By Les 3 Mousquethesards", fill='red')
         root.after(3000, LoadMeilleurScore)
 
 
@@ -59,8 +59,8 @@ def SaveMeilleurScore(resultat):
     # FichierScore=open('HighScore','r')
     # lecture=pickle.load(FichierScore)
     #
-    # # Si le score réalisé à la fin de la partie
-    # # est supérieur à celui déjà enregistré dans le fichier
+    # # Si le score rï¿½alisï¿½ ï¿½ la fin de la partie
+    # # est supï¿½rieur ï¿½ celui dï¿½jï¿½ enregistrï¿½ dans le fichier
     # # alors on remplace ce dernier par le nouveau score record
     #
     # if resultat>lecture:
@@ -74,15 +74,15 @@ def SaveMeilleurScore(resultat):
 
 
 # Cette fonction affiche un message
-# lui indiquant qu'il a établit un
+# lui indiquant qu'il a etablit un
 # nouveau record :D
 def MessageRecord():
     canvas.delete(ALL)
-    canvas.create_text(320, 240, font=('Georgia', 18), text="Vous avez établi un nouveau record !!", fill='red')
+    canvas.create_text(320, 240, font=('Georgia', 18), text="Vous avez etabli un nouveau record !!", fill='red')
     root.after(3000, LoadMeilleurScore)
 
 
-# Quant à cette fonction elle va permettre
+# Quant a cette fonction elle va permettre
 # de lire le meilleur score afin de l'afficher
 def LoadMeilleurScore():
     global game
@@ -97,7 +97,7 @@ def LoadMeilleurScore():
         root.after(3000, EcranDePresentation)
 
 
-# Cette fonction permet de vérifier
+# Cette fonction permet de vï¿½rifier
 # l'existence d'un fichier
 def existe(fname):
     try:
@@ -108,16 +108,16 @@ def existe(fname):
         return 0
 
 
-# Cette fonction permet de réinitialiser le jeu
-# selon la volonté du joueur de recommencer une partie
+# Cette fonction permet de rï¿½initialiser le jeu
+# selon la volontï¿½ du joueur de recommencer une partie
 def new_game():
     global game
     game.init_board()
 
 
 # Cette fonction permet d'effacer
-# le nombre de point gagnés et affichés
-# suite à la destruction d'un ennemi
+# le nombre de point gagnï¿½s et affichï¿½s
+# suite ï¿½ la destruction d'un ennemi
 def EffacerScore():
     global afficherScore
     canvas.delete(afficherScore[0])
@@ -125,7 +125,7 @@ def EffacerScore():
 
 
 # Cette fonction permet d'afficher
-# le nombre de points gagnés à la suite
+# le nombre de points gagnï¿½s ï¿½ la suite
 # de la destruction d'un ennemi
 def bla(donnee, x, y, x2, y2):
     global afficherScore
@@ -151,8 +151,8 @@ def move(dx):
 
 
 
-# Cette fonction gère le tir des ennemis
-# et vérifie si un a atteint le canon
+# Cette fonction gï¿½re le tir des ennemis
+# et vï¿½rifie si un a atteint le canon
 # mobile du joueur
 def launch_enemy_missile(itr):
     global game
@@ -163,7 +163,7 @@ def launch_enemy_missile(itr):
         game.enemies_missile.append(EnemyMissile(enemy.x, enemy.y))
         
 
-# Cette fonction permet d'animer l'obus tiré
+# Cette fonction permet d'animer l'obus tirï¿½
 # par un ennemi
 def animate_enemies_missile():
     global game
@@ -171,8 +171,8 @@ def animate_enemies_missile():
         for missile in game.enemies_missile:
             missile.move()
 
-            # Si un tir ennemi parvient à son objectif en
-            # touchant le canon mobile du joueur ben il crève ==> partie terminée !! :p
+            # Si un tir ennemi parvient ï¿½ son objectif en
+            # touchant le canon mobile du joueur ben il crï¿½ve ==> partie terminï¿½e !! :p
             if missile.x >= game.student.x and missile.x <= game.student.x+60 and \
                     missile.y >= game.student.y:
                 game.student.explod()
@@ -184,7 +184,7 @@ def animate_enemies_missile():
                     root.after(500, game.student.revive())
                 else:
 
-                    # On efface l'écran
+                    # On efface l'ï¿½cran
                     canvas.delete(ALL)
                     AffichageVie.configure(text="Vies : " + str(0), font=('Fixedsys',16))
                     image()
@@ -192,7 +192,7 @@ def animate_enemies_missile():
                     game.stop_animation()
                     game.start = False
 
-                    # On vérifie le score
+                    # On vï¿½rifie le score
                     SaveMeilleurScore(game.score)
 
 
@@ -205,8 +205,8 @@ def image():
     canvas.create_image(320, 240, image=photo)
 
     
-# Cette fonction va permettre de gérer le tir du canon
-# ainsi que les collisions avec les cibles situées en
+# Cette fonction va permettre de gï¿½rer le tir du canon
+# ainsi que les collisions avec les cibles situï¿½es en
 # haut du canevas :)
 def launch_missile(event):
     global game
@@ -217,7 +217,7 @@ def launch_missile(event):
                 time.sleep(0.09)
 
 
-# Cette fonction va permettre d'animer l'obus tiré par
+# Cette fonction va permettre d'animer l'obus tirï¿½ par
 # le canon mobile
 def animate_missile():
     global game
@@ -242,7 +242,7 @@ def animate_missile():
     
 
 # Les deux fonctions ci-dessous permettent
-# de diriger le canon mobile de gauche à droite
+# de diriger le canon mobile de gauche ï¿½ droite
 def right(event):
     global game
     if game.start and not game.paused:
@@ -267,9 +267,9 @@ def main_animation(itr):
 def pause(event):
     global game
 
-    # Si le jeu n'a pas commencé
-    # la fonction ne démarre pas
-    # Il en est de même si le joueur
+    # Si le jeu n'a pas commencï¿½
+    # la fonction ne dï¿½marre pas
+    # Il en est de mï¿½me si le joueur
     # est mort :p
     if game.start and not game.student.lives == 0:
         game.pause_pressed()
@@ -341,8 +341,8 @@ class Loyer(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'Loyer'
-        self.text = ["Etes-vous dépassé par votre loyer ? ",
-                     "Pensez à faire une simulation d'une aide au logement auprès de la CAF. "
+        self.text = ["Etes-vous dï¿½passï¿½ par votre loyer ? ",
+                     "Pensez ï¿½ faire une simulation d'une aide au logement auprï¿½s de la CAF. "
                      "Visitez le site de la caf sur : http://www.caf.fr/"]
         self.img = PhotoImage(file='img/loyer_180x40.gif')
         self.set_body()
@@ -356,9 +356,9 @@ class Alcool(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'Alcool'
-        self.text = ["Passer des soirées top arrosées est dangereux pour votre assiduité.",
-                     "Si l'alcool vous mène la vie dure, "
-                     "bénéficiez d'une aide anonyme en appelant le 0 980 980 930."]
+        self.text = ["Passer des soirï¿½es top arrosï¿½es est dangereux pour votre assiduitï¿½.",
+                     "Si l'alcool vous mï¿½ne la vie dure, "
+                     "bï¿½nï¿½ficiez d'une aide anonyme en appelant le 0 980 980 930."]
         self.img = PhotoImage(file='img/alcool_180x40.gif')
         self.set_body()
 
@@ -371,8 +371,8 @@ class Drogue(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'Drogue'
-        self.text = ["La consommation de drogue est dangereuse pour votre santé ...et votre diplôme. ",
-                     "Si vous n'arrivez pas à vous débarrasser de votre addiction. "
+        self.text = ["La consommation de drogue est dangereuse pour votre santï¿½ ...et votre diplï¿½me. ",
+                     "Si vous n'arrivez pas ï¿½ vous dï¿½barrasser de votre addiction. "
                      "Faites-vous aider en appelant anonymement le 0 800 23 13 13"]
         self.img = PhotoImage(file='img/drogue_180x40.gif')
         self.set_body()
@@ -386,8 +386,8 @@ class Paperasse(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'Paperasse'
-        self.text = ["Les démarches administratives sont entrain de vous faire perdre la tête. ",
-                     "Visitez le nouveau site mis à disposition des étudiants qui regroupe toutes les démarches."
+        self.text = ["Les dï¿½marches administratives sont entrain de vous faire perdre la tï¿½te. ",
+                     "Visitez le nouveau site mis ï¿½ disposition des ï¿½tudiants qui regroupe toutes les dï¿½marches."
                      "https://www.etudiant.gouv.fr/"]
         self.img = PhotoImage(file='img/paperasse_180x40.gif')
         self.set_body()
@@ -401,8 +401,8 @@ class MST(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'MST'
-        self.text = ["N'oubliez jamais de sortir protégé !",
-                     "En cas de doutes, faites-vous dépister !"
+        self.text = ["N'oubliez jamais de sortir protï¿½gï¿½ !",
+                     "En cas de doutes, faites-vous dï¿½pister !"
                      "Renseignez-vous sur https://www.sida-info-service.org/ "]
         self.img = PhotoImage(file='img/mst_180x40.gif')
         self.set_body()
@@ -491,7 +491,7 @@ class Game:
         for _ in range(NB_START_ENEMIES):
             self.enemies.append(Loyer())
 
-        # On efface tout à l'écran
+        # On efface tout ï¿½ l'ï¿½cran
         background = PhotoImage(file='earth.gif')
         canvas.create_image(240, 320, image=background)
 
@@ -542,19 +542,19 @@ if __name__ == "__main__":
     ENEMIES_MISSILE_DY = 3
     MISSILE_DY = 10
 
-    # Création de la fenêtre principale
+    # Crï¿½ation de la fenï¿½tre principale
 
     root = Tk()
 
-    # Titre de la fenêtre
+    # Titre de la fenï¿½tre
 
     root.title('University Invaders')
 
-    # Définition du canevas ( Ecran de jeu )
+    # Dï¿½finition du canevas ( Ecran de jeu )
 
     canvas = Canvas(root, width=WIDTH, height=HEIGHT, bg='black')
 
-    # Définition des touches qui vont permettre
+    # Dï¿½finition des touches qui vont permettre
     # de diriger le canon mobile
 
     canvas.bind_all("<Right>", right)
@@ -565,10 +565,10 @@ if __name__ == "__main__":
     canvas.grid(row=1, column=0, columnspan=2, rowspan=3)
 
     # Installation d'une image de fond
-    # pour être plus dans l'ambiance 8)
+    # pour ï¿½tre plus dans l'ambiance 8)
 
 
-    # Définition des boutons
+    # Dï¿½finition des boutons
 
     # Ce bouton permet de commencer une nouvelle partie
 
@@ -587,10 +587,10 @@ if __name__ == "__main__":
     afficherScore = []
 
     # Cette variable va permettre de suspendre certaines
-    # fonctions durant l'affichage de l'écran de présentation
+    # fonctions durant l'affichage de l'ï¿½cran de prï¿½sentation
 
     # Si le fichier contenant les scores n'existe pas
-    # on le crée avec comme valeur de départ ==> 0
+    # on le crï¿½e avec comme valeur de dï¿½part ==> 0
 
     if existe('HighScore')==0:
         FichierScore=open('HighScore', 'w')
@@ -599,11 +599,11 @@ if __name__ == "__main__":
 
     game = Game()
 
-    # On affiche l'écran de présentation du jeu
+    # On affiche l'ï¿½cran de prï¿½sentation du jeu
 
     EcranDePresentation()
 
-    # On met le gestionnaire d'événements en route
+    # On met le gestionnaire d'ï¿½vï¿½nements en route
 
     root.mainloop()
 

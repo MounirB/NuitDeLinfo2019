@@ -318,8 +318,14 @@ class Enemy:
         self.text = ["", "", ""]
 
     def explod(self):
+        global game
         for b in self.body:
             canvas.delete(b)
+        game.paused = True
+        game.stop_animation()
+        
+        game.paused = False
+        game.launch_animation()
 
     def redraw(self):
         for b in self.body:

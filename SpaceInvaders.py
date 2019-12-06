@@ -324,7 +324,7 @@ class Enemy:
         canvas.delete(self.body)
         game.paused = True
         game.stop_animation()
-        Message(self.message(phase=game.phase))
+        messagebox.showinfo("Info", self.message(phase=game.phase))
         game.paused = False
         game.launch_animation()
 

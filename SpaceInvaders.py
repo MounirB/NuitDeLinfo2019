@@ -238,7 +238,8 @@ def animate_missile():
 
             # if no more enemies
             if not game.enemies:
-                game.init_board()
+                game.stop_animation()
+                root.after(500, game.init_board)
     
 
 # Les deux fonctions ci-dessous permettent
@@ -313,6 +314,8 @@ class Enemy:
         self.body.append(canvas.create_rectangle(self.x, self.y, self.x + 60, self.y + 20, fill='blue'))
         self.body.append(canvas.create_rectangle(self.x, self.y, self.x + 20, self.y + 40, fill='blue'))
         self.body.append(canvas.create_rectangle(self.x + 40, self.y, self.x + 60, self.y + 40, fill='blue'))
+        self.type = "default"
+        self.text = ["", "", ""]
 
     def explod(self):
         for b in self.body:
@@ -327,77 +330,52 @@ class Enemy:
         self.body.append(canvas.create_rectangle(self.x + 40, self.y, self.x + 60, self.y + 40, fill='blue'))
 
     def message(self, phase):
-        text = ""
-        return text
+        return self.text[phase]
 
 
 class Loyer(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'Loyer'
-
-    def message(self, phase):
-        if phase == 0:
-            text = "Êtes-vous dépassé par votre loyer ? "
-        else :
-            text = "Pensez à faire une simulation d'une aide au logement auprès de la CAF. " \
-               "Visitez le site de la caf sur : http://www.caf.fr/"
-        return text
+        self.text = ["Etes-vous dépassé par votre loyer ? ",
+                     "Pensez à faire une simulation d'une aide au logement auprès de la CAF. "
+                     "Visitez le site de la caf sur : http://www.caf.fr/"]
 
 
 class Alcool(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'Alcool'
-
-    def message(self, phase):
-        if phase == 0:
-            text = "Passer des soirées top arrosées est dangereux pour votre assiduité."
-        else:
-            text = "Si l'alcool vous mène la vie dure, " \
-                   "bénéficiez d'une aide anonyme en appelant le 0 980 980 930."
-        return text
+        self.text = ["Passer des soirées top arrosées est dangereux pour votre assiduité.",
+                     "Si l'alcool vous mène la vie dure, "
+                     "bénéficiez d'une aide anonyme en appelant le 0 980 980 930."]
 
 
 class Drogue(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'Drogue'
+        self.text = ["La consommation de drogue est dangereuse pour votre santé ...et votre diplôme. ",
+                     "Si vous n'arrivez pas à vous débarrasser de votre addiction. "
+                     "Faites-vous aider en appelant anonymement le 0 800 23 13 13"]
 
-    def message(self, phase):
-        if phase == 0:
-            text = "La consommation de drogue est dangereuse pour votre santé ...et votre diplôme. "
-        else:
-            text = "Si vous n'arrivez pas à vous débarrasser de votre addiction." \
-               "Faites-vous aider en appelant anonymement le 0 800 23 13 13"
-        return text
 
 class Paperasse(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'Paperasse'
-
-    def message(self, phase):
-        if phase == 0:
-            text = "Les démarches administratives sont entrain de vous faire perdre la tête. "
-        else:
-            text = "Visitez le nouveau site mis à disposition des étudiants qui regroupe toutes les démarches." \
-               "https://www.etudiant.gouv.fr/"
-        return text
+        self.text = ["Les démarches administratives sont entrain de vous faire perdre la tête. ",
+                     "Visitez le nouveau site mis à disposition des étudiants qui regroupe toutes les démarches."
+                     "https://www.etudiant.gouv.fr/"]
 
 
 class MST(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'MST'
-
-    def message(self, phase):
-        if phase == 0:
-            text = "N'oubliez jamais de sortir protégé !"
-        else:
-            text = "En cas de doutes, faites-vous dépister !" \
-               "Renseignez-vous sur https://www.sida-info-service.org/ "
-        return text
+        self.text = ["N'oubliez jamais de sortir protégé !",
+                     "En cas de doutes, faites-vous dépister !"
+                     "Renseignez-vous sur https://www.sida-info-service.org/ "]
 
 
 class Missile:
@@ -471,7 +449,9 @@ class Game:
         canvas.delete(ALL)
         self.score = 0
         self.student = Student()
+        self.missiles = []
         self.enemies = []
+        self.enemies_missile = []
         for _ in range(NB_START_ENEMIES):
             self.enemies.append(Enemy())
 
@@ -484,6 +464,7 @@ class Game:
 
         self.start = True
         self.paused = False
+        self.stop_animations = False
         root.after(1000, launch_enemy_missile())
         main_animation()
 

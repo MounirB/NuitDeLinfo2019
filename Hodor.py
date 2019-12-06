@@ -476,7 +476,7 @@ if __name__ == "__main__":
 
     root = Tk()
 
-    root.title('University Invaders')
+    root.title('University\'nvaders')
 
     canvas = Canvas(root, width=WIDTH, height=HEIGHT, bg='grey')
 

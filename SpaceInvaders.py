@@ -326,7 +326,7 @@ class Enemy:
         self.body.append(canvas.create_rectangle(self.x, self.y, self.x + 20, self.y + 40, fill='blue'))
         self.body.append(canvas.create_rectangle(self.x + 40, self.y, self.x + 60, self.y + 40, fill='blue'))
 
-    def message(self, text):
+    def message(self, phase):
         text = ""
         return text
 
@@ -336,9 +336,11 @@ class Loyer(Enemy):
         super().__init__()
         self.type = 'Loyer'
 
-    def message(self, text):
-        text = "Êtes-vous dépassé par votre loyer ? " \
-               "Pensez à faire une simulation d'une aide au logement auprès de la CAF. " \
+    def message(self, phase):
+        if phase == 0:
+            text = "Êtes-vous dépassé par votre loyer ? "
+        else :
+            text = "Pensez à faire une simulation d'une aide au logement auprès de la CAF. " \
                "Visitez le site de la caf sur : http://www.caf.fr/"
         return text
 
@@ -348,11 +350,12 @@ class Alcool(Enemy):
         super().__init__()
         self.type = 'Alcool'
 
-    def message(self, text):
-        text = "Vous passez très souvent des soirées trop arrosés ?" \
-               "L'abus d'alcool est mauvais pour la santé en période universitaire. " \
-               "Faites-vous aidé si vous souffrez d'addiction. " \
-               "Bénéficiez d'une aide anonyme au 0 980 980 930."
+    def message(self, phase):
+        if phase == 0:
+            text = "Passer des soirées top arrosées est dangereux pour votre assiduité."
+        else:
+            text = "Si l'alcool vous mène la vie dure, " \
+                   "bénéficiez d'une aide anonyme en appelant le 0 980 980 930."
         return text
 
 
@@ -361,9 +364,11 @@ class Drogue(Enemy):
         super().__init__()
         self.type = 'Drogue'
 
-    def message(self, text):
-        text = "La drogue détruit des vies. " \
-               "Si vous n'arrivez pas à vous débarrasser de votre addiction." \
+    def message(self, phase):
+        if phase == 0:
+            text = "La consommation de drogue est dangereuse pour votre santé ...et votre diplôme. "
+        else:
+            text = "Si vous n'arrivez pas à vous débarrasser de votre addiction." \
                "Faites-vous aider en appelant anonymement le 0 800 23 13 13"
         return text
 
@@ -372,10 +377,12 @@ class Paperasse(Enemy):
         super().__init__()
         self.type = 'Paperasse'
 
-    def message(self, text):
-        text = "Vous êtes perdus par toutes les démarches administratives. " \
-               "Visitez le nouveau site mis à disposition des étudiants qui regroupe toutes les démarches." \
-               "Aller sur https://www.etudiant.gouv.fr/"
+    def message(self, phase):
+        if phase == 0:
+            text = "Les démarches administratives sont entrain de vous faire perdre la tête. "
+        else:
+            text = "Visitez le nouveau site mis à disposition des étudiants qui regroupe toutes les démarches." \
+               "https://www.etudiant.gouv.fr/"
         return text
 
 
@@ -384,9 +391,11 @@ class MST(Enemy):
         super().__init__()
         self.type = 'MST'
 
-    def message(self, text):
-        text = "N'oubliez jamais de sortir protégé." \
-               "En cas de doutes, faites-vous dépister !" \
+    def message(self, phase):
+        if phase == 0:
+            text = "N'oubliez jamais de sortir protégé !"
+        else:
+            text = "En cas de doutes, faites-vous dépister !" \
                "Renseignez-vous sur https://www.sida-info-service.org/ "
         return text
 

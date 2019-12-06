@@ -1,12 +1,3 @@
-#####################################
-#                                   #
-#  Programme : University invaders  #
-#  Auteur : Les 3 Mousquethesards   #
-#  Date de creation : 06/12/19      #
-#                                   #
-#####################################
-
-
 from tkinter import *
 from tkinter import messagebox
 import random
@@ -26,7 +17,7 @@ def EcranDePresentation():
 def Titre():
     global game
     if not game.start:
-        canvas.create_text(260, 240, font=('Fixedsys', 24), text="UNIVERSITY INVADERS", fill='blue')
+        canvas.create_text(260, 240, font=('Fixedsys', 24), text="UNIVERSITY'NVADERS", fill='blue')
         root.after(2000, Titre2)
 
 
@@ -270,7 +261,7 @@ class Loyer(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'Loyer'
-        self.text = ["Etes-vous dépassé par votre loyer ? "
+        self.text = ["Etes-vous dépassé par votre loyer ? ",
                      "Pensez à faire une simulation d'une aide au logement auprès de la CAF. "
                      "Visitez le site de la caf sur : http://www.caf.fr/"]
         self.img = PhotoImage(file='img/loyer_180x40.gif')
@@ -285,7 +276,7 @@ class Alcool(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'Alcool'
-        self.text = ["Passer des soirées top arrosées est dangereux pour votre assiduité."
+        self.text = ["Passer des soirées top arrosées est dangereux pour votre assiduité.",
                      "Si l'alcool vous mène la vie dure, "
                      "bénéficiez d'une aide anonyme en appelant le 0 980 980 930."]
         self.img = PhotoImage(file='img/alcool_180x40.gif')
@@ -300,7 +291,7 @@ class Drogue(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'Drogue'
-        self.text = ["La consommation de drogue est dangereuse pour votre santé ...et votre diplôme. "
+        self.text = ["La consommation de drogue est dangereuse pour votre santé ...et votre diplôme. ",
                      "Si vous n'arrivez pas à vous débarrasser de votre addiction. "
                      "Faites-vous aider en appelant anonymement le 0 800 23 13 13"]
         self.img = PhotoImage(file='img/drogue_180x40.gif')
@@ -315,7 +306,7 @@ class Paperasse(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'Paperasse'
-        self.text = ["Les démarches administratives sont entrain de vous faire perdre la tête. "
+        self.text = ["Les démarches administratives sont entrain de vous faire perdre la tête. ",
                      "Visitez le nouveau site mis à disposition des étudiants qui regroupe toutes les démarches."
                      "https://www.etudiant.gouv.fr/"]
         self.img = PhotoImage(file='img/paperasse_180x40.gif')
@@ -330,7 +321,7 @@ class MST(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'MST'
-        self.text = ["N'oubliez jamais de sortir protégé !"
+        self.text = ["N'oubliez jamais de sortir protégé !",
                      "En cas de doutes, faites-vous dépister !"
                      "Renseignez-vous sur https://www.sida-info-service.org/ "]
         self.img = PhotoImage(file='img/mst_180x40.gif')
@@ -473,6 +464,7 @@ if __name__ == "__main__":
     X_LIMIT = [MARGIN, WIDTH-MARGIN]
     Y_LIMIT = [MARGIN, HEIGHT-MARGIN]
     delay_frame = 200
+    phase = 0
     speed_bg = 5
     window_width = WIDTH
     window_height = HEIGHT

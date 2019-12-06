@@ -16,6 +16,7 @@
 ##########################################
 
 from tkinter import *
+from tkinter import messagebox
 import random
 import time
 import pickle
@@ -179,13 +180,14 @@ def animate_enemies_missile():
 
                 game.stop_animation()
                 
-                if game.student.lives >=1:
-                    AffichageVie.configure(text="Lives : "+str(game.student.lives), font=('Fixedsys',16))
+                if game.student.lives >= 1:
+                    AffichageVie.configure(text="Vies : "+str(game.student.lives), font=('Fixedsys',16))
                     root.after(500, game.student.revive())
                 else:
 
                     # On efface l'écran
                     canvas.delete(ALL)
+                    AffichageVie.configure(text="Vies : " + str(game.student.lives),font=('Fixedsys',16))
                     image()
                     canvas.create_text(320, 240, font=('Fixedsys', 18), text="Game Over !!", fill='red')
                     game.stop_animation()
@@ -200,7 +202,7 @@ def animate_enemies_missile():
 # fait un game over !! :( :(
 def image():
     global photo
-    photo=PhotoImage(file='apocalypse.gif')
+    photo=PhotoImage(file='apocalypse.GIF')
     canvas.create_image(320, 240, image=photo)
 
     
@@ -276,7 +278,7 @@ def pause(event):
 
 class Student:
     """
-    A peacfule Student
+    A peaceful Student
     """
     def __init__(self):
         self.x = X_LIMIT[0] + X_LIMIT[1]//2
@@ -318,7 +320,13 @@ class Enemy:
         self.body = canvas.create_rectangle( self.x + 60, self.y + 20, fill='blue')
 
     def explod(self):
+        global game
         canvas.delete(self.body)
+        game.paused = True
+        game.stop_animation()
+        Message(self.message(phase=game.phase))
+        game.paused = False
+        game.launch_animation()
 
     def redraw(self):
         canvas.delete(self.body)
@@ -440,6 +448,7 @@ class Game:
         self.start = False
         self.stop_animations = False
         self.score = 0
+        self.phase = 0
         self.student = Student()
         self.missiles = []
         self.enemies = []

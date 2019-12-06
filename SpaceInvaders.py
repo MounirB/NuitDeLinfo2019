@@ -160,7 +160,7 @@ def animate_missile():
             missile.move()
 
             for enemy in game.enemies:
-                if missile.x+5 >= enemy.x and missile.x-5 <= enemy.x+60 and\
+                if missile.x+5 >= enemy.x and missile.x-5 <= enemy.x+180 and\
                         missile.y+5 >= enemy.y and missile.y-5 <= enemy.y+60:
                     game.score += 50
                     missile.explod()
@@ -420,7 +420,7 @@ class Game:
         self.enemies_missile = []
         self.generate_enemies()
 
-        # background = PhotoImage(file='img/vid.gif')
+        # background = PhotoImage(file='img/vid.gif', format="gif -index 2")
         # canvas.create_image(100, 100, image=background)
 
         AffichageScore.configure(text="Score : " + str(self.score))
@@ -482,12 +482,8 @@ if __name__ == "__main__":
 
     root.title('University Invaders')
 
-    canvas = Canvas(root, width=WIDTH, height=HEIGHT)
+    canvas = Canvas(root, width=WIDTH, height=HEIGHT, bg='black')
 
-    background = PhotoImage(file='img/vid.gif')
-    background_label = Label(root, image=background)
-    background_label.place(x=0, y=0, relwidth=1, relheight=1)
-    canvas.pack()
 
     canvas.bind_all("<Right>", right)
     canvas.bind_all("<Left>", left)

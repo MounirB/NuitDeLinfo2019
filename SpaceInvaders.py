@@ -472,6 +472,11 @@ if __name__ == "__main__":
     MARGIN = 5
     X_LIMIT = [MARGIN, WIDTH-MARGIN]
     Y_LIMIT = [MARGIN, HEIGHT-MARGIN]
+    delay_frame = 200
+    phase = 0
+    speed_bg = 5
+    window_width = WIDTH
+    window_height = HEIGHT
 
     NB_START_ENEMIES = 4
     NB_LIVES_START = 3
@@ -482,7 +487,7 @@ if __name__ == "__main__":
 
     root.title('University Invaders')
 
-    canvas = Canvas(root, width=WIDTH, height=HEIGHT, bg='black')
+    canvas = Canvas(root, width=WIDTH, height=HEIGHT, bg='grey')
 
 
     canvas.bind_all("<Right>", right)

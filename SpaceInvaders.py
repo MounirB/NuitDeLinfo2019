@@ -182,13 +182,14 @@ def animate_enemies_missile():
 
                 game.stop_animation()
                 
-                if game.student.lives >=1:
-                    AffichageVie.configure(text="Lives : "+str(game.student.lives), font=('Fixedsys',16))
+                if game.student.lives >= 1:
+                    AffichageVie.configure(text="Vies : "+str(game.student.lives), font=('Fixedsys',16))
                     root.after(500, game.student.revive())
                 else:
 
                     # On efface l'écran
                     canvas.delete(ALL)
+                    AffichageVie.configure(text="Vies : " + str(game.student.lives),font=('Fixedsys',16))
                     image()
                     canvas.create_text(320, 240, font=('Fixedsys', 18), text="Game Over !!", fill='red')
                     game.stop_animation()
@@ -203,7 +204,7 @@ def animate_enemies_missile():
 # fait un game over !! :( :(
 def image():
     global photo
-    photo=PhotoImage(file='apocalypse.gif')
+    photo=PhotoImage(file='apocalypse.GIF')
     canvas.create_image(320, 240, image=photo)
 
     
@@ -279,7 +280,7 @@ def pause(event):
 
 class Student:
     """
-    A peacfule Student
+    A peaceful Student
     """
     def __init__(self):
         self.x = X_LIMIT[0] + X_LIMIT[1]//2

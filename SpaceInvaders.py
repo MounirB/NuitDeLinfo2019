@@ -40,7 +40,7 @@ def EcranDePresentation():
 # On afficher le nom du jeu à l'écran
 def Titre():
     global game
-    if game.start != 1:
+    if not game.start:
         canvas.create_text(320, 240, font=('Fixedsys', 24), text="SPACE INVADERS", fill='blue')
         root.after(2000, Titre2)
 
@@ -48,7 +48,7 @@ def Titre():
 # On affiche le nom de l'auteur ( It's me !! :p )
 def Titre2():
     global game
-    if game.start != 1:
+    if not game.start:
         canvas.create_text(320, 270, font=('Freshbot', 18), text="By Shakan972", fill='red')
         root.after(3000, LoadMeilleurScore)
 
@@ -157,12 +157,11 @@ def move(dx):
 # mobile du joueur
 def launch_enemy_missile():
     global game
-    if not game.paused and  game.start and game.enemies:
+    if not game.paused and game.start and game.enemies:
         root.after(1000, launch_enemy_missile)
         # Choose enemy that fires missil
         enemy = game.enemies[random.randint(0, len(game.enemies)-1)]
         game.enemies_missile.append(EnemyMissile(enemy.x, enemy.y))
-        animate_enemies_missile()
         
 
 # Cette fonction permet d'animer l'obus tiré
@@ -180,8 +179,6 @@ def animate_enemies_missile():
                 game.student.explod()
                 missile.explod()
 
-                # Diminution du capital de vies
-                # du joueur
                 game.stop_animation()
                 
                 if game.student.lives >=1:
@@ -219,7 +216,6 @@ def launch_missile(event):
             game.missiles.append(Missile(game.student.x, game.student.y - 20))
             if game.missiles:
                 time.sleep(0.09)
-                animate_missile()
 
 
 # Cette fonction va permettre d'animer l'obus tiré par
@@ -249,24 +245,22 @@ def animate_missile():
 # de diriger le canon mobile de gauche à droite
 def right(event):
     global game
-    if game.start:
-        if not game.paused:
-            move(20)
+    if game.start and not game.paused:
+        move(20)
 
 
 def left(event):
     global game
-    if game.start:
-        if not game.paused:
-            move(-20)
+    if game.start and not game.paused:
+        move(-20)
 
 
 def main_animation():
     global game
-    if game.stat and not game.stop_animations:
+    if game.start and not game.stop_animations:
         animate_enemies_missile()
         animate_missile()
-        root.after(50, main_animation())
+        root.after(50, main_animation)
 
 
 # Cette fonction permet d'effectuer une pause en cours de partie
@@ -295,11 +289,13 @@ class Student:
         canvas.delete(self.body)
 
     def revive(self):
+        global game
         self.x = X_LIMIT[0] + X_LIMIT[1]//2
         self.y = Y_LIMIT[1] - 5
         canvas.delete(self.body)
         self.body = canvas.create_rectangle(self.x, self.y, self.x + 20, self.y + 20, fill='green')
         self.lives -= 1
+        game.launch_animation()
 
     def redraw(self):
         canvas.delete(self.body)
@@ -334,6 +330,7 @@ class Enemy:
         text = ""
         return text
 
+
 class Loyer(Enemy):
     def __init__(self):
         super().__init__()
@@ -344,6 +341,7 @@ class Loyer(Enemy):
                "Pensez à faire une simulation d'une aide au logement auprès de la CAF. " \
                "Visitez le site de la caf sur : http://www.caf.fr/"
         return text
+
 
 class Alcool(Enemy):
     def __init__(self):
@@ -356,6 +354,7 @@ class Alcool(Enemy):
                "Faites-vous aidé si vous souffrez d'addiction. " \
                "Bénéficiez d'une aide anonyme au 0 980 980 930."
         return text
+
 
 class Drogue(Enemy):
     def __init__(self):
@@ -379,6 +378,7 @@ class Paperasse(Enemy):
                "Aller sur https://www.etudiant.gouv.fr/"
         return text
 
+
 class MST(Enemy):
     def __init__(self):
         super().__init__()
@@ -389,6 +389,7 @@ class MST(Enemy):
                "En cas de doutes, faites-vous dépister !" \
                "Renseignez-vous sur https://www.sida-info-service.org/ "
         return text
+
 
 class Missile:
     """
@@ -475,6 +476,7 @@ class Game:
         self.start = True
         self.paused = False
         root.after(1000, launch_enemy_missile())
+        main_animation()
 
     def stop_animation(self):
         self.stop_animations = True

@@ -57,21 +57,22 @@ def Titre2():
 # Cette fonction va permettre d'enregistrer
 # le meilleur score
 def SaveMeilleurScore(resultat):
-    FichierScore=open('HighScore','r')
-    lecture=pickle.load(FichierScore)
-
-    # Si le score réalisé à la fin de la partie
-    # est supérieur à celui déjà enregistré dans le fichier
-    # alors on remplace ce dernier par le nouveau score record
-    
-    if resultat>lecture:
-        FichierScore=open('HighScore','w')
-        pickle.dump(resultat,FichierScore)
-        FichierScore.close()
-        root.after(2000, MessageRecord)
-    else:
-        root.after(15000, EcranDePresentation)
-    FichierScore.close()
+    return None
+    # FichierScore=open('HighScore','r')
+    # lecture=pickle.load(FichierScore)
+    #
+    # # Si le score réalisé à la fin de la partie
+    # # est supérieur à celui déjà enregistré dans le fichier
+    # # alors on remplace ce dernier par le nouveau score record
+    #
+    # if resultat>lecture:
+    #     FichierScore=open('HighScore','w')
+    #     pickle.dump(resultat,FichierScore)
+    #     FichierScore.close()
+    #     root.after(2000, MessageRecord)
+    # else:
+    #     root.after(15000, EcranDePresentation)
+    # FichierScore.close()
 
 
 # Cette fonction affiche un message
@@ -94,7 +95,7 @@ def LoadMeilleurScore():
         canvas.delete(ALL)
         canvas.create_text(320, 240, font=('Fixedsys', 24), text="HIGH SCORE", fill='blue')
         canvas.create_text(320, 270, font=('Fixedsys', 24), text=str(lecture), fill='blue')
-        FichierScore.close()
+        # FichierScore.close()
         root.after(3000, EcranDePresentation)
 
 
@@ -141,7 +142,8 @@ def bla(donnee, x, y, x2, y2):
 # la direction choisie par le joueur
 def move(dx):
     global game
-    if game.student.lives != 0 and not game.paused:
+    print(game.student.lives)
+    if game.student.lives >= 0 and not game.paused:
         game.student.x += dx
         if game.student.x <= X_LIMIT[0]:
             game.student.x = X_LIMIT[0]
@@ -154,10 +156,10 @@ def move(dx):
 # Cette fonction gère le tir des ennemis
 # et vérifie si un a atteint le canon
 # mobile du joueur
-def launch_enemy_missile():
+def launch_enemy_missile(itr):
     global game
-    if not game.paused and game.start and game.enemies:
-        root.after(1000, launch_enemy_missile)
+    if not game.paused and game.start and game.enemies and game.itr == itr:
+        root.after(1000, launch_enemy_missile, itr)
         # Choose enemy that fires missil
         enemy = game.enemies[random.randint(0, len(game.enemies)-1)]
         game.enemies_missile.append(EnemyMissile(enemy.x, enemy.y))
@@ -181,13 +183,12 @@ def animate_enemies_missile():
                 game.stop_animation()
                 
                 if game.student.lives >= 1:
-                    AffichageVie.configure(text="Vies : "+str(game.student.lives), font=('Fixedsys',16))
                     root.after(500, game.student.revive())
                 else:
 
                     # On efface l'écran
                     canvas.delete(ALL)
-                    AffichageVie.configure(text="Vies : " + str(game.student.lives),font=('Fixedsys',16))
+                    AffichageVie.configure(text="Vies : " + str(0), font=('Fixedsys',16))
                     image()
                     canvas.create_text(320, 240, font=('Fixedsys', 18), text="Game Over !!", fill='red')
                     game.stop_animation()
@@ -296,6 +297,7 @@ class Student:
         canvas.delete(self.body)
         self.body = canvas.create_rectangle(self.x, self.y, self.x + 20, self.y + 20, fill='green')
         self.lives -= 1
+        AffichageVie.configure(text="Vies : " + str(game.student.lives), font=('Fixedsys', 16))
         game.launch_animation()
 
     def redraw(self):
@@ -502,10 +504,10 @@ class Game:
         self.paused = False
         self.stop_animations = False
         self.launch_main_animation()
-        root.after(1000, launch_enemy_missile())
 
     def launch_main_animation(self):
         self.itr += 1
+        root.after(1000, launch_enemy_missile, self.itr)
         main_animation(self.itr)
 
     def stop_animation(self):

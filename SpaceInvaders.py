@@ -115,26 +115,24 @@ def new_game():
     game.init_board()
 
 
-# Cette fonction permet d'afficher
-# le nombre de points gagnés à la suite
-# de la destruction d'un ennemi
-def score(donnee, x, y, x2, y2):
-    global afficherScore
-    afficherScore.append(canvas.create_text(x + x2, y + y2,
-                                            font=('Fixedsys', 8),
-                                            text=str(donnee)+' pts', fill='red'))
-    root.after(1500, EffacerScore)
-
-
 # Cette fonction permet d'effacer
 # le nombre de point gagnés et affichés
 # suite à la destruction d'un ennemi
 def EffacerScore():
     global afficherScore
-    i=0
-    while i<len(afficherScore):
-        canvas.delete(afficherScore[i])
-        i+=1
+    canvas.delete(afficherScore[0])
+    afficherScore = afficherScore[1:]
+
+
+# Cette fonction permet d'afficher
+# le nombre de points gagnés à la suite
+# de la destruction d'un ennemi
+def bla(donnee, x, y, x2, y2):
+    global afficherScore
+    afficherScore.append(canvas.create_text(x + x2, y + y2,
+                                            font=('Fixedsys', 8),
+                                            text=str(donnee)+' pts', fill='red'))
+    root.after(1500, EffacerScore)
 
 
 # La fonction ci-dessous permet
@@ -232,7 +230,7 @@ def animate_missile():
                     game.score += 50
                     missile.explod()
                     AffichageScore.configure(text="Score : "+str(game.score), font=('Fixedsys',16))
-                    # score(50, enemy.x, enemy.y, 30, 20)
+                    bla(50, enemy.x, enemy.y, 30, 20)
                     enemy.explod()
                     game.enemies.remove(enemy)
 
@@ -256,12 +254,12 @@ def left(event):
         move(-20)
 
 
-def main_animation():
+def main_animation(itr):
     global game
-    if game.start and not game.stop_animations:
+    if game.start and not game.stop_animations and game.itr == itr:
         animate_enemies_missile()
         animate_missile()
-        root.after(50, main_animation)
+        root.after(50, main_animation, itr)
 
 
 # Cette fonction permet d'effectuer une pause en cours de partie
@@ -310,24 +308,22 @@ class Enemy:
     def __init__(self):
         self.x = random.randint(X_LIMIT[0], X_LIMIT[1])
         self.y = random.randint(Y_LIMIT[0], Y_LIMIT[1]//4)
-        self.body = []
-        self.body.append(canvas.create_rectangle(self.x, self.y, self.x + 60, self.y + 20, fill='blue'))
-        self.body.append(canvas.create_rectangle(self.x, self.y, self.x + 20, self.y + 40, fill='blue'))
-        self.body.append(canvas.create_rectangle(self.x + 40, self.y, self.x + 60, self.y + 40, fill='blue'))
+        self.body = None
         self.type = "default"
         self.text = ["", "", ""]
+        self.img = None
+        self.set_body()
+
+    def set_body(self):
+        self.body = canvas.create_rectangle( self.x + 60, self.y + 20, fill='blue')
 
     def explod(self):
-        for b in self.body:
-            canvas.delete(b)
+        canvas.delete(self.body)
 
     def redraw(self):
-        for b in self.body:
-            canvas.delete(b)
+        canvas.delete(self.body)
         self.body = []
-        self.body.append(canvas.create_rectangle(self.x, self.y, self.x + 60, self.y + 20, fill='blue'))
-        self.body.append(canvas.create_rectangle(self.x, self.y, self.x + 20, self.y + 40, fill='blue'))
-        self.body.append(canvas.create_rectangle(self.x + 40, self.y, self.x + 60, self.y + 40, fill='blue'))
+        self.set_body()
 
     def message(self, phase):
         return self.text[phase]
@@ -340,6 +336,12 @@ class Loyer(Enemy):
         self.text = ["Etes-vous dépassé par votre loyer ? ",
                      "Pensez à faire une simulation d'une aide au logement auprès de la CAF. "
                      "Visitez le site de la caf sur : http://www.caf.fr/"]
+        self.img = PhotoImage(file='img/loyer_180x40.gif')
+        self.set_body()
+
+    def set_body(self):
+        if self.img is not None:
+            self.body = canvas.create_image(self.x, self.y, image=self.img)
 
 
 class Alcool(Enemy):
@@ -444,6 +446,7 @@ class Game:
         self.enemies_missile = []
         self.paused = False
         self.paused_body = None
+        self.itr = 0
 
     def init_board(self):
         canvas.delete(ALL)
@@ -453,7 +456,7 @@ class Game:
         self.enemies = []
         self.enemies_missile = []
         for _ in range(NB_START_ENEMIES):
-            self.enemies.append(Enemy())
+            self.enemies.append(Loyer())
 
         # On efface tout à l'écran
         background = PhotoImage(file='earth.gif')
@@ -465,15 +468,19 @@ class Game:
         self.start = True
         self.paused = False
         self.stop_animations = False
+        self.launch_main_animation()
         root.after(1000, launch_enemy_missile())
-        main_animation()
+
+    def launch_main_animation(self):
+        self.itr += 1
+        main_animation(self.itr)
 
     def stop_animation(self):
         self.stop_animations = True
 
     def launch_animation(self):
         self.stop_animations = False
-        main_animation()
+        self.launch_main_animation()
 
     def pause_pressed(self):
         if self.paused:
@@ -544,6 +551,8 @@ if __name__ == "__main__":
     AffichageScore.grid(row=0,column=0,sticky=W)
     AffichageVie.grid(row=0,column=1,sticky=E)
 
+    afficherScore = []
+
     # Cette variable va permettre de suspendre certaines
     # fonctions durant l'affichage de l'écran de présentation
 
@@ -551,7 +560,7 @@ if __name__ == "__main__":
     # on le crée avec comme valeur de départ ==> 0
 
     if existe('HighScore')==0:
-        FichierScore=open('HighScore','w')
+        FichierScore=open('HighScore', 'w')
         pickle.dump(0,FichierScore)
         FichierScore.close()
 

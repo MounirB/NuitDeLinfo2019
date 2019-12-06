@@ -5,256 +5,238 @@ import time
 import pickle
 
 
-def EcranDePresentation():
-    global game
-    if not game.start:
-        AffichageScore.configure(text="",font=('Fixedsys',16))
-        AffichageVie.configure(text="",font=('Fixedsys',16))
-        canvas.delete(ALL)
-        root.after(1500, Titre)
+def Hold_The_Door():
+    global Hold_The_Dooor
+    if not Hold_The_Dooor.hold_THEEE_DOOOoooR:
+        Hold_The_Doooor.configure(text="",font=('Fixedsys',16))
+        Hold_Theee_Door.configure(text="",font=('Fixedsys',16))
+        Hooold_The_Door.delete(ALL)
+        Hodor.after(1500, Hoooold_The_Dooor)
 
 
-def Titre():
-    global game
-    if not game.start:
-        canvas.create_text(260, 240, font=('Fixedsys', 24), text="UNIVERSITY'NVADERS", fill='blue')
-        root.after(2000, Titre2)
+def Hoooold_The_Dooor():
+    global Hold_The_Dooor
+    if not Hold_The_Dooor.hold_THEEE_DOOOoooR:
+        Hooold_The_Door.create_text(260, 240, font=('Fixedsys', 24), text="UNIVERSITY INVADERS", fill='blue')
+        Hodor.after(2000, Hoooold_The_Dooor2)
 
 
-# On affiche le nom des auteurs
-def Titre2():
-    global game
-    if not game.start:
-        canvas.create_text(280, 270, font=('Freshbot', 18), text="By Les 3 Mousquethesards", fill='red')
-        root.after(3000, LoadMeilleurScore)
+def Hoooold_The_Dooor2():
+    global Hold_The_Dooor
+    if not Hold_The_Dooor.hold_THEEE_DOOOoooR:
+        Hooold_The_Door.create_text(280, 270, font=('Freshbot', 18), text="By Les 3 Mousquethesards", fill='red')
+        Hodor.after(3000, Hoooooooooold_The_Door)
 
 
-# Cette fonction va permettre d'enregistrer
-# le meilleur score
-def SaveMeilleurScore(resultat):
+def Hooooooold_The_Door(H):
     return None
 
 
-def MessageRecord():
-    canvas.delete(ALL)
-    canvas.create_text(320, 240, font=('Georgia', 18), text="Vous avez etabli un nouveau record !!", fill='red')
-    root.after(3000, LoadMeilleurScore)
+def Hol():
+    Hooold_The_Door.delete(ALL)
+    Hooold_The_Door.create_text(320, 240, font=('Georgia', 18), text="Vous avez etabli un nouveau record !!", fill='red')
+    Hodor.after(3000, Hoooooooooold_The_Door)
 
-def LoadMeilleurScore():
-    global game
-    if game.start:
-        # FichierScore=open('HighScore','r')
-        # lecture=pickle.load(FichierScore)
-        lecture = "WIN"
-        canvas.delete(ALL)
-        canvas.create_text(320, 240, font=('Fixedsys', 24), text="HIGH SCORE", fill='blue')
-        canvas.create_text(320, 270, font=('Fixedsys', 24), text=str(lecture), fill='blue')
-        # FichierScore.close()
-        root.after(3000, EcranDePresentation)
+def Hoooooooooold_The_Door():
+    global Hold_The_Dooor
+    if Hold_The_Dooor.hold_THEEE_DOOOoooR:
+        Hold__The_Door = "WIN"
+        Hooold_The_Door.delete(ALL)
+        Hooold_The_Door.create_text(320, 240, font=('Fixedsys', 24), text="HIGH SCORE", fill='blue')
+        Hooold_The_Door.create_text(320, 270, font=('Fixedsys', 24), text=str(Hold__The_Door), fill='blue')
+        Hodor.after(3000, Hold_The_Door)
 
 
-def existe(fname):
+def existe(Holld_The_Door):
     try:
-        f=open(fname,'r')
-        f.close()
+        HODORRRRrrrrRRRRRRrrrrRRR=open(Holld_The_Door,'r')
+        HODORRRRrrrrRRRRRRrrrrRRR.close()
         return 1
     except:
         return 0
 
 
-def new_game():
-    global game
-    game.init_board()
+def HHold_The_Dooor():
+    global Hold_The_Dooor
+    Hold_The_Dooor.init_board()
 
 
-def EffacerScore():
-    global afficherScore
-    canvas.delete(afficherScore[0])
-    afficherScore = afficherScore[1:]
+def HOOLD_The_Door():
+    global HoOld_The_Door
+    Hooold_The_Door.delete(HoOld_The_Door[0])
+    HoOld_The_Door = HoOld_The_Door[1:]
 
 
-def bla(donnee, x, y, x2, y2):
-    global afficherScore
-    afficherScore.append(canvas.create_text(x + x2, y + y2,
+def HooLD_The_Door(HoOld_The_Door, hoddor, hodoorr, x2, y2):
+    global Hoold_The_DOor
+    Hoold_The_DOor.append(Hooold_The_Door.create_text(hoddor + x2, hodoorr + y2,
                                             font=('Fixedsys', 8),
-                                            text=str(donnee)+' pts', fill='red'))
-    root.after(1500, EffacerScore)
+                                            text=str(HoOld_The_Door)+' pts', fill='red'))
+    Hodor.after(1500, HOOLD_The_Door)
 
 
-# La fonction ci-dessous permet
-# d'animer le canon mobile selon
-# la direction choisie par le joueur
-def move(dx):
-    global game
-    if game.student.lives >= 0 and not game.paused:
-        game.student.x += dx
-        if game.student.x <= X_LIMIT[0]:
-            game.student.x = X_LIMIT[0]
-        elif game.student.x >= X_LIMIT[1]:
-            game.student.x = X_LIMIT[1]
-        game.student.redraw()
+def Holddedoor(Holdedoor):
+    global Hold_The_Dooor
+    if Hold_The_Dooor.HOldorR.hhhoooldDEEEEEEEEdoor >= 0 and not Hold_The_Dooor.hOOOOooooOOOld_THEEE_DOOOoooR:
+        Hold_The_Dooor.HOldorR.hoddor += Holdedoor
+        if Hold_The_Dooor.HOldorR.hoddor <= Holdedooor[0]:
+            Hold_The_Dooor.HOldorR.hoddor = Holdedooor[0]
+        elif Hold_The_Dooor.HOldorR.hoddor >= Holdedooor[1]:
+            Hold_The_Dooor.HOldorR.hoddor = Holdedooor[1]
+        Hold_The_Dooor.HOldorR.redraw()
 
 
 
-def launch_enemy_missile(itr):
-    global game
-    if not game.paused and game.start and game.enemies and game.itr == itr:
-        root.after(1000, launch_enemy_missile, itr)
-        # Choose enemy that fires missil
-        enemy = game.enemies[random.randint(0, len(game.enemies)-1)]
-        game.enemies_missile.append(EnemyMissile(enemy.x, enemy.y))
+def HOOldedoor(HodoRRRRROOOOORRRRRRRRrrrr):
+    global Hold_The_Dooor
+    if not Hold_The_Dooor.hOOOOooooOOOld_THEEE_DOOOoooR and Hold_The_Dooor.hold_THEEE_DOOOoooR and Hold_The_Dooor.HoOdDedoor and Hold_The_Dooor.HodoRRRRROOOOORRRRRRRRrrrr == HodoRRRRROOOOORRRRRRRRrrrr:
+        Hodor.after(1000, HOOldedoor, HodoRRRRROOOOORRRRRRRRrrrr)
+        enemy = Hold_The_Dooor.HoOdDedoor[random.randint(0, len(Hold_The_Dooor.HoOdDedoor)-1)]
+        Hold_The_Dooor.HoOdDedoor_holDDoooorr.append(EnemyHolDDoooorr(enemy.hoddor, enemy.hodoorr))
 
 
-def animate_enemies_missile():
-    global game
-    if game.enemies_missile:
-        for missile in game.enemies_missile:
-            missile.move()
-            if missile.x >= game.student.x and missile.x <= game.student.x+60 and \
-                    missile.y >= game.student.y:
-                game.student.explod()
-                missile.explod()
+def Hold_dedoor():
+    global Hold_The_Dooor
+    if Hold_The_Dooor.HoOdDedoor_holDDoooorr:
+        for holDDoooorr in Hold_The_Dooor.HoOdDedoor_holDDoooorr:
+            holDDoooorr.Holddedoor()
+            if holDDoooorr.hoddor >= Hold_The_Dooor.HOldorR.hoddor and holDDoooorr.hoddor <= Hold_The_Dooor.HOldorR.hoddor+60 and \
+                    holDDoooorr.hodoorr >= Hold_The_Dooor.HOldorR.hodoorr:
+                Hold_The_Dooor.HOldorR.explod()
+                holDDoooorr.explod()
 
-                game.stop_animation()
+                Hold_The_Dooor.stop_animation()
                 
-                if game.student.lives >= 1:
-                    root.after(500, game.student.revive())
+                if Hold_The_Dooor.HOldorR.hhhoooldDEEEEEEEEdoor >= 1:
+                    Hodor.after(500, Hold_The_Dooor.HOldorR.revive())
                 else:
-                    canvas.delete(ALL)
-                    AffichageVie.configure(text="Vies : " + str(0), font=('Fixedsys',16))
+                    Hooold_The_Door.delete(ALL)
+                    Hold_Theee_Door.configure(text="Vies : " + str(0), font=('Fixedsys',16))
                     image()
-                    canvas.create_text(320, 240, font=('Fixedsys', 18), text="Game Over !!", fill='red')
-                    game.stop_animation()
-                    game.start = False
-                    SaveMeilleurScore(game.score)
+                    Hooold_The_Door.create_text(320, 240, font=('Fixedsys', 18), text="Hold_The_Dooor Over !!", fill='red')
+                    Hold_The_Dooor.stop_animation()
+                    Hold_The_Dooor.hold_THEEE_DOOOoooR = False
+                    Hooooooold_The_Door(Hold_The_Dooor.holdDeDOoOOOOOOrRRRrrr)
 
 
-def image():
-    global photo
-    photo=PhotoImage(file='img/apocalypse.GIF')
-    canvas.create_image(320, 240, image=photo)
+def HOLDdeDooRRR():
+    global holdeDoor
+    holdeDoor=PhotoImage(file='img/apocalypse.GIF')
+    Hooold_The_Door.create_image(320, 240, image=holdeDoor)
 
 
-def launch_missile(event):
-    global game
-    if game.start:
-        if not game.paused:
-            game.missiles.append(Missile(game.student.x, game.student.y - 20))
-            if game.missiles:
+def HOLDEDOOR(event):
+    global Hold_The_Dooor
+    if Hold_The_Dooor.hold_THEEE_DOOOoooR:
+        if not Hold_The_Dooor.hOOOOooooOOOld_THEEE_DOOOoooR:
+            Hold_The_Dooor.holDDoooorrr.append(HolDDoooorr(Hold_The_Dooor.HOldorR.hoddor, Hold_The_Dooor.HOldorR.hodoorr - 20))
+            if Hold_The_Dooor.holDDoooorrr:
                 time.sleep(0.09)
 
 
-def animate_missile():
-    global game
-    if game.missiles:
-        for missile in game.missiles:
-            missile.move()
+def ODEODOR():
+    global Hold_The_Dooor
+    if Hold_The_Dooor.holDDoooorrr:
+        for holDDoooorr in Hold_The_Dooor.holDDoooorrr:
+            holDDoooorr.Holddedoor()
 
-            for enemy in game.enemies:
-                if missile.x+5 >= enemy.x and missile.x-5 <= enemy.x+180 and\
-                        missile.y+5 >= enemy.y and missile.y-5 <= enemy.y+60:
-                    game.score += 50
-                    missile.explod()
-                    AffichageScore.configure(text="Score : "+str(game.score), font=('Fixedsys',16))
-                    bla(50, enemy.x, enemy.y, 30, 20)
+            for enemy in Hold_The_Dooor.HoOdDedoor:
+                if holDDoooorr.hoddor+5 >= enemy.hoddor and holDDoooorr.hoddor-5 <= enemy.hoddor+180 and\
+                        holDDoooorr.hodoorr+5 >= enemy.hodoorr and holDDoooorr.hodoorr-5 <= enemy.hodoorr+60:
+                    Hold_The_Dooor.holdDeDOoOOOOOOrRRRrrr += 50
+                    holDDoooorr.explod()
+                    Hold_The_Doooor.configure(text="Vies : "+str(Hold_The_Dooor.holdDeDOoOOOOOOrRRRrrr), font=('Fixedsys',16))
+                    HooLD_The_Door(50, enemy.hoddor, enemy.hodoorr, 30, 20)
                     enemy.explod()
-                    game.enemies.remove(enemy)
+                    Hold_The_Dooor.HoOdDedoor.reHolddedoor(enemy)
 
-            # if no more enemies
-            if not game.enemies:
-                game.stop_animation()
-                root.after(500, game.init_board)
+            if not Hold_The_Dooor.HoOdDedoor:
+                Hold_The_Dooor.stop_animation()
+                Hodor.after(500, Hold_The_Dooor.init_board)
     
 
-def right(event):
-    global game
-    if game.start and not game.paused:
-        move(20)
+def Holdedddoor(event):
+    global Hold_The_Dooor
+    if Hold_The_Dooor.hold_THEEE_DOOOoooR and not Hold_The_Dooor.hOOOOooooOOOld_THEEE_DOOOoooR:
+        Holddedoor(20)
 
 
-def left(event):
-    global game
-    if game.start and not game.paused:
-        move(-20)
+def Holdedddoorr(event):
+    global Hold_The_Dooor
+    if Hold_The_Dooor.hold_THEEE_DOOOoooR and not Hold_The_Dooor.hOOOOooooOOOld_THEEE_DOOOoooR:
+        Holddedoor(-20)
 
 
-def main_animation(itr):
-    global game
-    if game.start and not game.stop_animations and game.itr == itr:
-        animate_enemies_missile()
-        animate_missile()
-        root.after(50, main_animation, itr)
+def Holdedddoorrr(HodoRRRRROOOOORRRRRRRRrrrr):
+    global Hold_The_Dooor
+    if Hold_The_Dooor.hold_THEEE_DOOOoooR and not Hold_The_Dooor.HOLddd_DOOOOOooRr and Hold_The_Dooor.HodoRRRRROOOOORRRRRRRRrrrr == HodoRRRRROOOOORRRRRRRRrrrr:
+        Hold_dedoor()
+        ODEODOR()
+        Hodor.after(50, Holdedddoorrr, HodoRRRRROOOOORRRRRRRRrrrr)
 
 
-# Cette fonction permet d'effectuer une pause en cours de partie
-def pause(event):
-    global game
+def hOOOOooOOOOooOOOld_THEeE_DOOOoooOR(event):
+    global Hold_The_Dooor
 
-    if game.start and not game.student.lives == 0:
-        game.pause_pressed()
+    if Hold_The_Dooor.hold_THEEE_DOOOoooR and not Hold_The_Dooor.HOldorR.hhhoooldDEEEEEEEEdoor == 0:
+        Hold_The_Dooor.pause_pressed()
 
 
-class Student:
-    """
-    A peaceful Student
-    """
+class HOldorR:
     def __init__(self):
-        self.x = X_LIMIT[0] + X_LIMIT[1]//2
-        self.y = Y_LIMIT[1] - 40
+        self.hoddor = OLDEDOOR[0] + OLDEDOOR[1]//2
+        self.hodoorr = OHLDEDOOR[1] - 40
         self.img = PhotoImage(file='img/student_40x100.gif')
-        self.body = canvas.create_image(self.x, self.y, image=self.img)
-        self.lives = 3
+        self.HODOOORHODORho = Hooold_The_Door.create_image(self.hoddor, self.hodoorr, image=self.img)
+        self.hhhoooldDEEEEEEEEdoor = 3
 
     def explod(self):
-        canvas.delete(self.body)
+        Hooold_The_Door.delete(self.HODOOORHODORho)
 
     def revive(self):
-        global game
-        self.x = X_LIMIT[0] + X_LIMIT[1]//2
-        self.y = Y_LIMIT[1] - 40
-        canvas.delete(self.body)
-        self.body = canvas.create_image(self.x, self.y, image=self.img)
-        self.lives -= 1
-        AffichageVie.configure(text="Vies : " + str(game.student.lives), font=('Fixedsys', 16))
-        game.launch_animation()
+        global Hold_The_Dooor
+        self.hoddor = OLDEDOOR[0] + OLDEDOOR[1]//2
+        self.hodoorr = OHLDEDOOR[1] - 40
+        Hooold_The_Door.delete(self.HODOOORHODORho)
+        self.HODOOORHODORho = Hooold_The_Door.create_image(self.hoddor, self.hodoorr, image=self.img)
+        self.hhhoooldDEEEEEEEEdoor -= 1
+        Hold_Theee_Door.configure(text="Vies : " + str(Hold_The_Dooor.HOldorR.hhhoooldDEEEEEEEEdoor), font=('Fixedsys', 16))
+        Hold_The_Dooor.launch_animation()
 
     def redraw(self):
-        canvas.delete(self.body)
-        self.body = canvas.create_image(self.x, self.y, image=self.img)
+        Hooold_The_Door.delete(self.HODOOORHODORho)
+        self.HODOOORHODORho = Hooold_The_Door.create_image(self.hoddor, self.hodoorr, image=self.img)
 
 
 class Enemy:
-    """
-    Too many things, life can be rough
-    """
     def __init__(self):
-        self.x = random.randint(X_LIMIT[0]+10, X_LIMIT[1]-10)
-        self.y = random.randint(Y_LIMIT[0]+10, Y_LIMIT[1]//4)
-        self.body = None
+        self.hoddor = random.randint(OLDEDOOR[0]+10, OLDEDOOR[1]-10)
+        self.hodoorr = random.randint(OHLDEDOOR[0]+10, OHLDEDOOR[1]//4)
+        self.HODOOORHODORho = None
         self.type = "default"
         self.text = ["", "", ""]
         self.img = None
         self.set_body()
 
     def set_body(self):
-        self.body = canvas.create_rectangle( self.x + 60, self.y + 20, fill='blue')
+        self.HODOOORHODORho = Hooold_The_Door.create_rectangle( self.hoddor + 60, self.hodoorr + 20, fill='blue')
 
     def explod(self):
-        global game
-        canvas.delete(self.body)
-        game.paused = True
-        game.stop_animation()
-        messagebox.showinfo("Info", self.message(phase=game.phase))
-        game.paused = False
-        game.launch_animation()
+        global Hold_The_Dooor
+        Hooold_The_Door.delete(self.HODOOORHODORho)
+        Hold_The_Dooor.hOOOOooooOOOld_THEEE_DOOOoooR = True
+        Hold_The_Dooor.stop_animation()
+        messagebox.showinfo("Info", self.message(HOOOoooOOldDDDdOOR=Hold_The_Dooor.HOOOoooOOldDDDdOOR))
+        Hold_The_Dooor.hOOOOooooOOOld_THEEE_DOOOoooR = False
+        Hold_The_Dooor.launch_animation()
 
     def redraw(self):
-        canvas.delete(self.body)
-        self.body = []
+        Hooold_The_Door.delete(self.HODOOORHODORho)
+        self.HODOOORHODORho = []
         self.set_body()
 
-    def message(self, phase):
-        return self.text[phase]
+    def message(self, HOOOoooOOldDDDdOOR):
+        return self.text[HOOOoooOOldDDDdOOR]
 
 
 class Loyer(Enemy):
@@ -269,7 +251,7 @@ class Loyer(Enemy):
 
     def set_body(self):
         if self.img is not None:
-            self.body = canvas.create_image(self.x, self.y, image=self.img)
+            self.HODOOORHODORho = Hooold_The_Door.create_image(self.hoddor, self.hodoorr, image=self.img)
 
 
 class Alcool(Enemy):
@@ -284,7 +266,7 @@ class Alcool(Enemy):
 
     def set_body(self):
         if self.img is not None:
-            self.body = canvas.create_image(self.x, self.y, image=self.img)
+            self.HODOOORHODORho = Hooold_The_Door.create_image(self.hoddor, self.hodoorr, image=self.img)
 
 
 class Drogue(Enemy):
@@ -299,7 +281,7 @@ class Drogue(Enemy):
 
     def set_body(self):
         if self.img is not None:
-            self.body = canvas.create_image(self.x, self.y, image=self.img)
+            self.HODOOORHODORho = Hooold_The_Door.create_image(self.hoddor, self.hodoorr, image=self.img)
 
 
 class Paperasse(Enemy):
@@ -314,7 +296,7 @@ class Paperasse(Enemy):
 
     def set_body(self):
         if self.img is not None:
-            self.body = canvas.create_image(self.x, self.y, image=self.img)
+            self.HODOOORHODORho = Hooold_The_Door.create_image(self.hoddor, self.hodoorr, image=self.img)
 
 
 class MST(Enemy):
@@ -329,187 +311,170 @@ class MST(Enemy):
 
     def set_body(self):
         if self.img is not None:
-            self.body = canvas.create_image(self.x, self.y, image=self.img)
+            self.HODOOORHODORho = Hooold_The_Door.create_image(self.hoddor, self.hodoorr, image=self.img)
 
 
-class Missile:
+class HolDDoooorr:
     """
     """
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+    def __init__(self, hoddor, hodoorr):
+        self.hoddor = hoddor
+        self.hodoorr = hodoorr
         self.img = PhotoImage(file='img/book_40x40.gif')
-        self.body = canvas.create_image(self.x, self.y, image=self.img)
-        self.dy = MISSILE_DY
+        self.HODOOORHODORho = Hooold_The_Door.create_image(self.hoddor, self.hodoorr, image=self.img)
+        self.hodoorrRrrRrr = Holdddoor
 
     def explod(self):
-        global game
-        canvas.delete(self.body)
-        game.missiles.remove(self)
+        global Hold_The_Dooor
+        Hooold_The_Door.delete(self.HODOOORHODORho)
+        Hold_The_Dooor.holDDoooorrr.reHolddedoor(self)
 
-    def move(self):
-        self.y -= self.dy
-        if self.y <= Y_LIMIT[0]:
+    def Holddedoor(self):
+        self.hodoorr -= self.hodoorrRrrRrr
+        if self.hodoorr <= OHLDEDOOR[0]:
             self.explod()
         else:
             self.redraw()
 
     def redraw(self):
-        canvas.delete(self.body)
-        self.body = canvas.create_image(self.x, self.y, image=self.img)
+        Hooold_The_Door.delete(self.HODOOORHODORho)
+        self.HODOOORHODORho = Hooold_The_Door.create_image(self.hoddor, self.hodoorr, image=self.img)
 
 
-class EnemyMissile:
+class HOOOOolDDoooorrrRRRR:
     """
     """
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-        self.body = canvas.create_oval(self.x, self.y, self.x + 4, self.y + 20, fill='orange')
-        self.dy = ENEMIES_MISSILE_DY
+    def __init__(self, hoddor, hodoorr):
+        self.hoddor = hoddor
+        self.hodoorr = hodoorr
+        self.HODOOORHODORho = Hooold_The_Door.create_oval(self.hoddor, self.hodoorr, self.hoddor + 4, self.hodoorr + 20, fill='orange')
+        self.hodoorrRrrRrr = HoOdDedoor_Holdddoor
 
     def explod(self):
-        global game
-        canvas.delete(self.body)
-        game.enemies_missile.remove(self)
+        global Hold_The_Dooor
+        Hooold_The_Door.delete(self.HODOOORHODORho)
+        Hold_The_Dooor.HoOdDedoor_holDDoooorr.reHolddedoor(self)
 
-    def move(self):
-        self.y += self.dy
-        if self.y >= Y_LIMIT[1]:
+    def Holddedoor(self):
+        self.hodoorr += self.hodoorrRrrRrr
+        if self.hodoorr >= OHLDEDOOR[1]:
             self.explod()
         else:
             self.redraw()
 
     def redraw(self):
-        canvas.delete(self.body)
-        self.body = canvas.create_oval(self.x, self.y, self.x + 4, self.y + 20, fill='orange')
+        Hooold_The_Door.delete(self.HODOOORHODORho)
+        self.HODOOORHODORho = Hooold_The_Door.create_oval(self.hoddor, self.hodoorr, self.hoddor + 4, self.hodoorr + 20, fill='orange')
 
 
-class Game:
+class Hold_The_Dooor:
     """
 
     """
     def __init__(self):
-        self.start = False
-        self.stop_animations = False
-        self.score = 0
-        self.phase = 0
-        self.student = Student()
-        self.missiles = []
-        self.enemies = []
-        self.enemies_missile = []
-        self.paused = False
+        self.hold_THEEE_DOOOoooR = False
+        self.HOLddd_DOOOOOooRr = False
+        self.holdDeDOoOOOOOOrRRRrrr = 0
+        self.HOOOoooOOldDDDdOOR = 0
+        self.HOldorR = HOldorR()
+        self.holDDoooorrr = []
+        self.HoOdDedoor = []
+        self.HoOdDedoor_holDDoooorr = []
+        self.hOOOOooooOOOld_THEEE_DOOOoooR = False
         self.paused_body = None
-        self.itr = 0
+        self.HodoRRRRROOOOORRRRRRRRrrrr = 0
 
     def init_board(self):
-        canvas.delete(ALL)
-        self.score = 0
-        self.student = Student()
-        self.missiles = []
-        self.enemies = []
-        self.enemies_missile = []
-        self.generate_enemies()
+        Hooold_The_Door.delete(ALL)
+        self.holdDeDOoOOOOOOrRRRrrr = 0
+        self.HOldorR = HOldorR()
+        self.holDDoooorrr = []
+        self.HoOdDedoor = []
+        self.HoOdDedoor_holDDoooorr = []
+        self.generate_HoOdDedoor()
 
-        # background = PhotoImage(file='img/vid.gif', format="gif -index 2")
-        # canvas.create_image(100, 100, image=background)
+        Hold_The_Doooor.configure(text="Score : " + str(self.holdDeDOoOOOOOOrRRRrrr))
+        Hold_Theee_Door.configure(text="Vies : " + str(self.HOldorR.hhhoooldDEEEEEEEEdoor))
 
-        AffichageScore.configure(text="Score : " + str(self.score))
-        AffichageVie.configure(text="Vies : " + str(self.student.lives))
+        self.hold_THEEE_DOOOoooR = True
+        self.hOOOOooooOOOld_THEEE_DOOOoooR = False
+        self.HOLddd_DOOOOOooRr = False
+        self.launch_animation()
 
-        self.start = True
-        self.paused = False
-        self.stop_animations = False
-        self.launch_main_animation()
+    def generate_HoOdDedoor(self):
+        self.HoOdDedoor.append(Loyer())
+        self.HoOdDedoor.append(MST())
+        self.HoOdDedoor.append(Paperasse())
+        self.HoOdDedoor.append(Alcool())
+        self.HoOdDedoor.append(Drogue())
 
-    def generate_enemies(self):
-        self.enemies.append(Loyer())
-        self.enemies.append(MST())
-        self.enemies.append(Paperasse())
-        self.enemies.append(Alcool())
-        self.enemies.append(Drogue())
-
-    def launch_main_animation(self):
-        self.itr += 1
-        root.after(1000, launch_enemy_missile, self.itr)
-        main_animation(self.itr)
+    def launch_Holdedddoorrr(self):
+        self.HodoRRRRROOOOORRRRRRRRrrrr += 1
+        Hodor.after(1000, HOOldedoor, self.HodoRRRRROOOOORRRRRRRRrrrr)
+        Holdedddoorrr(self.HodoRRRRROOOOORRRRRRRRrrrr)
 
     def stop_animation(self):
-        self.stop_animations = True
+        self.HOLddd_DOOOOOooRr = True
 
     def launch_animation(self):
-        self.stop_animations = False
-        self.launch_main_animation()
+        self.HOLddd_DOOOOOooRr = False
+        self.launch_Holdedddoorrr()
 
     def pause_pressed(self):
-        if self.paused:
-            self.paused = False
-            canvas.delete(self.paused_body)
+        if self.hOOOOooooOOOld_THEEE_DOOOoooR:
+            self.hOOOOooooOOOld_THEEE_DOOOoooR = False
+            Hooold_The_Door.delete(self.paused_body)
             self.launch_animation()
         else:
-            self.paused = True
-            self.paused_body = canvas.create_text(320, 240, font=('Fixedsys', 18), text="PAUSE")
+            self.hOOOOooooOOOld_THEEE_DOOOoooR = True
+            self.paused_body = Hooold_The_Door.create_text(320, 240, font=('Fixedsys', 18), text="PAUSE")
             self.stop_animation()
 
 
-#######################
-#                     #
-# Programme principal #
-#                     #
-#######################
 if __name__ == "__main__":
-    WIDTH = 480
-    HEIGHT = 630
-    MARGIN = 5
-    X_LIMIT = [MARGIN, WIDTH-MARGIN]
-    Y_LIMIT = [MARGIN, HEIGHT-MARGIN]
-    delay_frame = 200
-    phase = 0
-    speed_bg = 5
-    window_width = WIDTH
-    window_height = HEIGHT
+    Holdoor = 480
+    Holdooor = 630
+    Holdoooor = 5
+    OLDEDOOR = [Holdoooor, Holdoor-Holdoooor]
+    OHLDEDOOR = [Holdoooor, Holdooor-Holdoooor]
 
-    NB_START_ENEMIES = 4
-    NB_LIVES_START = 3
-    ENEMIES_MISSILE_DY = 3
-    MISSILE_DY = 10
+    HoOdDedoor = 4
+    Hollldedoor = 3
+    HoOdDedoor_Holdddoor = 3
+    Holdddoor = 10
 
-    root = Tk()
+    Hodor = Tk()
 
-    root.title('University Invaders')
+    Hodor.title('University Invaders')
 
-    canvas = Canvas(root, width=WIDTH, height=HEIGHT, bg='grey')
+    Hooold_The_Door = Hooold_The_Door(Hodor, Holdoor=Holdoor, Holdooor=Holdooor, bg='black')
 
 
-    canvas.bind_all("<Right>", right)
-    canvas.bind_all("<Left>", left)
-    canvas.bind_all("<space>", launch_missile)
-    canvas.bind_all("<p>", pause)
+    Hooold_The_Door.bind_all("<Right>", Holdedddoor)
+    Hooold_The_Door.bind_all("<Left>", Holdedddoorr)
+    Hooold_The_Door.bind_all("<space>", HOLDEDOOR)
+    Hooold_The_Door.bind_all("<p>", hOOOOooOOOOooOOOld_THEeE_DOOOoooOR)
 
-    canvas.grid(row=1, column=0, columnspan=2, rowspan=3)
+    Hooold_The_Door.grid(row=1, column=0, columnspan=2, rowspan=3)
 
-    Button(root, text="Nouvelle partie", command=new_game).grid(row=2, column=2, sticky=N, padx=5)
-    Button(root, text="Quitter", command=root.destroy).grid(row=3, column=2, sticky=N, padx=5)
+    Button(Hodor, text="Nouvelle partie", command=HHold_The_Dooor).grid(row=2, column=2, sticky=N, padx=5)
+    Button(Hodor, text="Quitter", command=Hodor.destroy).grid(row=3, column=2, sticky=N, padx=5)
 
 
-    # On affiche les indications concernant
-    # le score et les vies restantes du joueur
+    Hold_The_Doooor=Label(Hodor, font=('Fixedsys', 16))
+    Hold_Theee_Door=Label(Hodor, font=('Fixedsys', 16))
+    Hold_The_Doooor.grid(row=0,column=0,sticky=W)
+    Hold_Theee_Door.grid(row=0,column=1,sticky=E)
 
-    AffichageScore=Label(root, font=('Fixedsys', 16))
-    AffichageVie=Label(root, font=('Fixedsys', 16))
-    AffichageScore.grid(row=0,column=0,sticky=W)
-    AffichageVie.grid(row=0,column=1,sticky=E)
-
-    afficherScore = []
+    Hoold_The_DOor = []
 
     if existe('HighScore')==0:
-        FichierScore=open('HighScore', 'w')
-        pickle.dump(0,FichierScore)
-        FichierScore.close()
+        HOOldoor=open('HighScore', 'w')
+        pickle.dump(0,HOOldoor)
+        HOOldoor.close()
 
-    game = Game()
+    Hold_The_Dooor = Game()
 
-    EcranDePresentation()
+    Hold_The_Door()
 
-    root.mainloop()
-
+    Hodor.mainloop()

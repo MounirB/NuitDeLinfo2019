@@ -16,6 +16,7 @@
 ##########################################
 
 from tkinter import *
+from tkinter import messagebox
 import random
 import time
 import pickle
@@ -323,7 +324,7 @@ class Enemy:
             canvas.delete(b)
         game.paused = True
         game.stop_animation()
-        
+        Message(self.message(phase=game.phase))
         game.paused = False
         game.launch_animation()
 
@@ -444,6 +445,7 @@ class Game:
         self.start = False
         self.stop_animations = False
         self.score = 0
+        self.phase = 0
         self.student = Student()
         self.missiles = []
         self.enemies = []

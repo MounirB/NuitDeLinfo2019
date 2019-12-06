@@ -7,26 +7,13 @@
 #####################################
 
 
-##########################################
-#                                        #
-# Importations des fonctions nécessaires #
-#                                        #
-##########################################
-
 from tkinter import *
 from tkinter import messagebox
 import random
 import time
 import pickle
 
-############################
-#                          #
-# Définition des fonctions #
-#                          #
-############################
 
-
-# Cette fonction affiche l'écran de présentation du jeu
 def EcranDePresentation():
     global game
     if not game.start:
@@ -36,19 +23,18 @@ def EcranDePresentation():
         root.after(1500, Titre)
 
 
-# On afficher le nom du jeu à l'écran
 def Titre():
     global game
     if not game.start:
-        canvas.create_text(320, 240, font=('Fixedsys', 24), text="UNIVERSITY INVADERS", fill='blue')
+        canvas.create_text(260, 240, font=('Fixedsys', 24), text="UNIVERSITY INVADERS", fill='blue')
         root.after(2000, Titre2)
 
 
-# On affiche le nom de l'auteur ( It's me !! :p )
+# On affiche le nom des auteurs
 def Titre2():
     global game
     if not game.start:
-        canvas.create_text(320, 270, font=('Freshbot', 18), text="By Les 3 Mousquethesards", fill='red')
+        canvas.create_text(280, 270, font=('Freshbot', 18), text="By Les 3 Mousquethesards", fill='red')
         root.after(3000, LoadMeilleurScore)
 
 
@@ -56,34 +42,13 @@ def Titre2():
 # le meilleur score
 def SaveMeilleurScore(resultat):
     return None
-    # FichierScore=open('HighScore','r')
-    # lecture=pickle.load(FichierScore)
-    #
-    # # Si le score réalisé à la fin de la partie
-    # # est supérieur à celui déjà enregistré dans le fichier
-    # # alors on remplace ce dernier par le nouveau score record
-    #
-    # if resultat>lecture:
-    #     FichierScore=open('HighScore','w')
-    #     pickle.dump(resultat,FichierScore)
-    #     FichierScore.close()
-    #     root.after(2000, MessageRecord)
-    # else:
-    #     root.after(15000, EcranDePresentation)
-    # FichierScore.close()
 
 
-# Cette fonction affiche un message
-# lui indiquant qu'il a établit un
-# nouveau record :D
 def MessageRecord():
     canvas.delete(ALL)
-    canvas.create_text(320, 240, font=('Georgia', 18), text="Vous avez établi un nouveau record !!", fill='red')
+    canvas.create_text(320, 240, font=('Georgia', 18), text="Vous avez etabli un nouveau record !!", fill='red')
     root.after(3000, LoadMeilleurScore)
 
-
-# Quant à cette fonction elle va permettre
-# de lire le meilleur score afin de l'afficher
 def LoadMeilleurScore():
     global game
     if game.start:
@@ -97,8 +62,6 @@ def LoadMeilleurScore():
         root.after(3000, EcranDePresentation)
 
 
-# Cette fonction permet de vérifier
-# l'existence d'un fichier
 def existe(fname):
     try:
         f=open(fname,'r')
@@ -108,25 +71,17 @@ def existe(fname):
         return 0
 
 
-# Cette fonction permet de réinitialiser le jeu
-# selon la volonté du joueur de recommencer une partie
 def new_game():
     global game
     game.init_board()
 
 
-# Cette fonction permet d'effacer
-# le nombre de point gagnés et affichés
-# suite à la destruction d'un ennemi
 def EffacerScore():
     global afficherScore
     canvas.delete(afficherScore[0])
     afficherScore = afficherScore[1:]
 
 
-# Cette fonction permet d'afficher
-# le nombre de points gagnés à la suite
-# de la destruction d'un ennemi
 def bla(donnee, x, y, x2, y2):
     global afficherScore
     afficherScore.append(canvas.create_text(x + x2, y + y2,
@@ -140,7 +95,6 @@ def bla(donnee, x, y, x2, y2):
 # la direction choisie par le joueur
 def move(dx):
     global game
-    print(game.student.lives)
     if game.student.lives >= 0 and not game.paused:
         game.student.x += dx
         if game.student.x <= X_LIMIT[0]:
@@ -151,9 +105,6 @@ def move(dx):
 
 
 
-# Cette fonction gère le tir des ennemis
-# et vérifie si un a atteint le canon
-# mobile du joueur
 def launch_enemy_missile(itr):
     global game
     if not game.paused and game.start and game.enemies and game.itr == itr:
@@ -161,18 +112,13 @@ def launch_enemy_missile(itr):
         # Choose enemy that fires missil
         enemy = game.enemies[random.randint(0, len(game.enemies)-1)]
         game.enemies_missile.append(EnemyMissile(enemy.x, enemy.y))
-        
 
-# Cette fonction permet d'animer l'obus tiré
-# par un ennemi
+
 def animate_enemies_missile():
     global game
     if game.enemies_missile:
         for missile in game.enemies_missile:
             missile.move()
-
-            # Si un tir ennemi parvient à son objectif en
-            # touchant le canon mobile du joueur ben il crève ==> partie terminée !! :p
             if missile.x >= game.student.x and missile.x <= game.student.x+60 and \
                     missile.y >= game.student.y:
                 game.student.explod()
@@ -183,31 +129,21 @@ def animate_enemies_missile():
                 if game.student.lives >= 1:
                     root.after(500, game.student.revive())
                 else:
-
-                    # On efface l'écran
                     canvas.delete(ALL)
                     AffichageVie.configure(text="Vies : " + str(0), font=('Fixedsys',16))
                     image()
                     canvas.create_text(320, 240, font=('Fixedsys', 18), text="Game Over !!", fill='red')
                     game.stop_animation()
                     game.start = False
-
-                    # On vérifie le score
                     SaveMeilleurScore(game.score)
 
 
-# Cette fonction va permettre d'afficher un
-# paysage post-apocalyptique si le joueur
-# fait un game over !! :( :(
 def image():
     global photo
-    photo=PhotoImage(file='apocalypse.GIF')
+    photo=PhotoImage(file='img/apocalypse.GIF')
     canvas.create_image(320, 240, image=photo)
 
-    
-# Cette fonction va permettre de gérer le tir du canon
-# ainsi que les collisions avec les cibles situées en
-# haut du canevas :)
+
 def launch_missile(event):
     global game
     if game.start:
@@ -217,8 +153,6 @@ def launch_missile(event):
                 time.sleep(0.09)
 
 
-# Cette fonction va permettre d'animer l'obus tiré par
-# le canon mobile
 def animate_missile():
     global game
     if game.missiles:
@@ -241,8 +175,6 @@ def animate_missile():
                 root.after(500, game.init_board)
     
 
-# Les deux fonctions ci-dessous permettent
-# de diriger le canon mobile de gauche à droite
 def right(event):
     global game
     if game.start and not game.paused:
@@ -267,10 +199,6 @@ def main_animation(itr):
 def pause(event):
     global game
 
-    # Si le jeu n'a pas commencé
-    # la fonction ne démarre pas
-    # Il en est de même si le joueur
-    # est mort :p
     if game.start and not game.student.lives == 0:
         game.pause_pressed()
 
@@ -281,8 +209,9 @@ class Student:
     """
     def __init__(self):
         self.x = X_LIMIT[0] + X_LIMIT[1]//2
-        self.y = Y_LIMIT[1] - 15
-        self.body = canvas.create_rectangle(self.x, self.y, self.x + 20, self.y + 20, fill='green')
+        self.y = Y_LIMIT[1] - 40
+        self.img = PhotoImage(file='img/student_40x100.gif')
+        self.body = canvas.create_image(self.x, self.y, image=self.img)
         self.lives = 3
 
     def explod(self):
@@ -291,16 +220,16 @@ class Student:
     def revive(self):
         global game
         self.x = X_LIMIT[0] + X_LIMIT[1]//2
-        self.y = Y_LIMIT[1] - 5
+        self.y = Y_LIMIT[1] - 40
         canvas.delete(self.body)
-        self.body = canvas.create_rectangle(self.x, self.y, self.x + 20, self.y + 20, fill='green')
+        self.body = canvas.create_image(self.x, self.y, image=self.img)
         self.lives -= 1
         AffichageVie.configure(text="Vies : " + str(game.student.lives), font=('Fixedsys', 16))
         game.launch_animation()
 
     def redraw(self):
         canvas.delete(self.body)
-        self.body = canvas.create_rectangle(self.x, self.y, self.x + 20, self.y + 20, fill='green')
+        self.body = canvas.create_image(self.x, self.y, image=self.img)
 
 
 class Enemy:
@@ -308,8 +237,8 @@ class Enemy:
     Too many things, life can be rough
     """
     def __init__(self):
-        self.x = random.randint(X_LIMIT[0], X_LIMIT[1])
-        self.y = random.randint(Y_LIMIT[0], Y_LIMIT[1]//4)
+        self.x = random.randint(X_LIMIT[0]+10, X_LIMIT[1]-10)
+        self.y = random.randint(Y_LIMIT[0]+10, Y_LIMIT[1]//4)
         self.body = None
         self.type = "default"
         self.text = ["", "", ""]
@@ -418,7 +347,8 @@ class Missile:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.body = canvas.create_oval(self.x, self.y, self.x + 20, self.y + 20, fill='yellow')
+        self.img = PhotoImage(file='img/book_40x40.gif')
+        self.body = canvas.create_image(self.x, self.y, image=self.img)
         self.dy = MISSILE_DY
 
     def explod(self):
@@ -435,7 +365,7 @@ class Missile:
 
     def redraw(self):
         canvas.delete(self.body)
-        self.body = canvas.create_oval(self.x, self.y, self.x + 20, self.y + 20, fill='yellow')
+        self.body = canvas.create_image(self.x, self.y, image=self.img)
 
 
 class EnemyMissile:
@@ -490,9 +420,8 @@ class Game:
         self.enemies_missile = []
         self.generate_enemies()
 
-        # On efface tout à l'écran
-        background = PhotoImage(file='earth.gif')
-        canvas.create_image(240, 320, image=background)
+        # background = PhotoImage(file='img/vid.gif')
+        # canvas.create_image(100, 100, image=background)
 
         AffichageScore.configure(text="Score : " + str(self.score))
         AffichageVie.configure(text="Vies : " + str(self.student.lives))
@@ -538,30 +467,27 @@ class Game:
 #                     #
 #######################
 if __name__ == "__main__":
-    NB_START_ENEMIES = 4
-    NB_LIVES_START = 3
     WIDTH = 480
     HEIGHT = 630
     MARGIN = 5
     X_LIMIT = [MARGIN, WIDTH-MARGIN]
     Y_LIMIT = [MARGIN, HEIGHT-MARGIN]
+
+    NB_START_ENEMIES = 4
+    NB_LIVES_START = 3
     ENEMIES_MISSILE_DY = 3
     MISSILE_DY = 10
 
-    # Création de la fenêtre principale
-
     root = Tk()
-
-    # Titre de la fenêtre
 
     root.title('University Invaders')
 
-    # Définition du canevas ( Ecran de jeu )
+    canvas = Canvas(root, width=WIDTH, height=HEIGHT)
 
-    canvas = Canvas(root, width=WIDTH, height=HEIGHT, bg='black')
-
-    # Définition des touches qui vont permettre
-    # de diriger le canon mobile
+    background = PhotoImage(file='img/vid.gif')
+    background_label = Label(root, image=background)
+    background_label.place(x=0, y=0, relwidth=1, relheight=1)
+    canvas.pack()
 
     canvas.bind_all("<Right>", right)
     canvas.bind_all("<Left>", left)
@@ -569,14 +495,6 @@ if __name__ == "__main__":
     canvas.bind_all("<p>", pause)
 
     canvas.grid(row=1, column=0, columnspan=2, rowspan=3)
-
-    # Installation d'une image de fond
-    # pour être plus dans l'ambiance 8)
-
-
-    # Définition des boutons
-
-    # Ce bouton permet de commencer une nouvelle partie
 
     Button(root, text="Nouvelle partie", command=new_game).grid(row=2, column=2, sticky=N, padx=5)
     Button(root, text="Quitter", command=root.destroy).grid(row=3, column=2, sticky=N, padx=5)
@@ -592,12 +510,6 @@ if __name__ == "__main__":
 
     afficherScore = []
 
-    # Cette variable va permettre de suspendre certaines
-    # fonctions durant l'affichage de l'écran de présentation
-
-    # Si le fichier contenant les scores n'existe pas
-    # on le crée avec comme valeur de départ ==> 0
-
     if existe('HighScore')==0:
         FichierScore=open('HighScore', 'w')
         pickle.dump(0,FichierScore)
@@ -605,11 +517,7 @@ if __name__ == "__main__":
 
     game = Game()
 
-    # On affiche l'écran de présentation du jeu
-
     EcranDePresentation()
-
-    # On met le gestionnaire d'événements en route
 
     root.mainloop()
 

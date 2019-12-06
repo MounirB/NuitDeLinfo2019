@@ -359,6 +359,12 @@ class Alcool(Enemy):
         self.text = ["Passer des soirées top arrosées est dangereux pour votre assiduité.",
                      "Si l'alcool vous mène la vie dure, "
                      "bénéficiez d'une aide anonyme en appelant le 0 980 980 930."]
+        self.img = PhotoImage(file='img/alcool_180x40.gif')
+        self.set_body()
+
+    def set_body(self):
+        if self.img is not None:
+            self.body = canvas.create_image(self.x, self.y, image=self.img)
 
 
 class Drogue(Enemy):
@@ -368,6 +374,12 @@ class Drogue(Enemy):
         self.text = ["La consommation de drogue est dangereuse pour votre santé ...et votre diplôme. ",
                      "Si vous n'arrivez pas à vous débarrasser de votre addiction. "
                      "Faites-vous aider en appelant anonymement le 0 800 23 13 13"]
+        self.img = PhotoImage(file='img/drogue_180x40.gif')
+        self.set_body()
+
+    def set_body(self):
+        if self.img is not None:
+            self.body = canvas.create_image(self.x, self.y, image=self.img)
 
 
 class Paperasse(Enemy):
@@ -377,6 +389,12 @@ class Paperasse(Enemy):
         self.text = ["Les démarches administratives sont entrain de vous faire perdre la tête. ",
                      "Visitez le nouveau site mis à disposition des étudiants qui regroupe toutes les démarches."
                      "https://www.etudiant.gouv.fr/"]
+        self.img = PhotoImage(file='img/paperasse_180x40.gif')
+        self.set_body()
+
+    def set_body(self):
+        if self.img is not None:
+            self.body = canvas.create_image(self.x, self.y, image=self.img)
 
 
 class MST(Enemy):
@@ -386,6 +404,12 @@ class MST(Enemy):
         self.text = ["N'oubliez jamais de sortir protégé !",
                      "En cas de doutes, faites-vous dépister !"
                      "Renseignez-vous sur https://www.sida-info-service.org/ "]
+        self.img = PhotoImage(file='img/mst_180x40.gif')
+        self.set_body()
+
+    def set_body(self):
+        if self.img is not None:
+            self.body = canvas.create_image(self.x, self.y, image=self.img)
 
 
 class Missile:

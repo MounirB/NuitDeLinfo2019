@@ -9,7 +9,7 @@
 
 ##########################################
 #                                        #
-# Importations des fonctions nécessaires #
+# Importations des fonctions nÃ©cessaires #
 #                                        #
 ##########################################
 
@@ -21,12 +21,12 @@ import pickle
 
 ############################
 #                          #
-# Définition des fonctions #
+# DÃ©finition des fonctions #
 #                          #
 ############################
 
 
-# Cette fonction affiche l'écran de présentation du jeu
+# Cette fonction affiche l'Ã©cran de prÃ©sentation du jeu
 def EcranDePresentation():
     global game
     if not game.start:
@@ -36,7 +36,7 @@ def EcranDePresentation():
         root.after(1500, Titre)
 
 
-# On afficher le nom du jeu à l'écran
+# On afficher le nom du jeu Ã  l'Ã©cran
 def Titre():
     global game
     if not game.start:
@@ -59,8 +59,8 @@ def SaveMeilleurScore(resultat):
     # FichierScore=open('HighScore','r')
     # lecture=pickle.load(FichierScore)
     #
-    # # Si le score réalisé à la fin de la partie
-    # # est supérieur à celui déjà enregistré dans le fichier
+    # # Si le score rÃ©alisÃ© Ã  la fin de la partie
+    # # est supÃ©rieur Ã  celui dÃ©jÃ  enregistrÃ© dans le fichier
     # # alors on remplace ce dernier par le nouveau score record
     #
     # if resultat>lecture:
@@ -74,15 +74,15 @@ def SaveMeilleurScore(resultat):
 
 
 # Cette fonction affiche un message
-# lui indiquant qu'il a établit un
+# lui indiquant qu'il a Ã©tablit un
 # nouveau record :D
 def MessageRecord():
     canvas.delete(ALL)
-    canvas.create_text(320, 240, font=('Georgia', 18), text="Vous avez établi un nouveau record !!", fill='red')
+    canvas.create_text(320, 240, font=('Georgia', 18), text="Vous avez Ã©tabli un nouveau record !!", fill='red')
     root.after(3000, LoadMeilleurScore)
 
 
-# Quant à cette fonction elle va permettre
+# Quant Ã  cette fonction elle va permettre
 # de lire le meilleur score afin de l'afficher
 def LoadMeilleurScore():
     global game
@@ -97,7 +97,7 @@ def LoadMeilleurScore():
         root.after(3000, EcranDePresentation)
 
 
-# Cette fonction permet de vérifier
+# Cette fonction permet de vÃ©rifier
 # l'existence d'un fichier
 def existe(fname):
     try:
@@ -108,16 +108,16 @@ def existe(fname):
         return 0
 
 
-# Cette fonction permet de réinitialiser le jeu
-# selon la volonté du joueur de recommencer une partie
+# Cette fonction permet de rÃ©initialiser le jeu
+# selon la volontÃ© du joueur de recommencer une partie
 def new_game():
     global game
     game.init_board()
 
 
 # Cette fonction permet d'effacer
-# le nombre de point gagnés et affichés
-# suite à la destruction d'un ennemi
+# le nombre de point gagnÃ©s et affichÃ©s
+# suite Ã  la destruction d'un ennemi
 def EffacerScore():
     global afficherScore
     canvas.delete(afficherScore[0])
@@ -125,7 +125,7 @@ def EffacerScore():
 
 
 # Cette fonction permet d'afficher
-# le nombre de points gagnés à la suite
+# le nombre de points gagnÃ©s Ã  la suite
 # de la destruction d'un ennemi
 def bla(donnee, x, y, x2, y2):
     global afficherScore
@@ -151,8 +151,8 @@ def move(dx):
 
 
 
-# Cette fonction gère le tir des ennemis
-# et vérifie si un a atteint le canon
+# Cette fonction gÃ¨re le tir des ennemis
+# et vÃ©rifie si un a atteint le canon
 # mobile du joueur
 def launch_enemy_missile(itr):
     global game
@@ -163,7 +163,7 @@ def launch_enemy_missile(itr):
         game.enemies_missile.append(EnemyMissile(enemy.x, enemy.y))
         
 
-# Cette fonction permet d'animer l'obus tiré
+# Cette fonction permet d'animer l'obus tirÃ©
 # par un ennemi
 def animate_enemies_missile():
     global game
@@ -171,8 +171,8 @@ def animate_enemies_missile():
         for missile in game.enemies_missile:
             missile.move()
 
-            # Si un tir ennemi parvient à son objectif en
-            # touchant le canon mobile du joueur ben il crève ==> partie terminée !! :p
+            # Si un tir ennemi parvient Ã  son objectif en
+            # touchant le canon mobile du joueur ben il crÃ¨ve ==> partie terminÃ©e !! :p
             if missile.x >= game.student.x and missile.x <= game.student.x+60 and \
                     missile.y >= game.student.y:
                 game.student.explod()
@@ -184,7 +184,7 @@ def animate_enemies_missile():
                     root.after(500, game.student.revive())
                 else:
 
-                    # On efface l'écran
+                    # On efface l'Ã©cran
                     canvas.delete(ALL)
                     AffichageVie.configure(text="Vies : " + str(0), font=('Fixedsys',16))
                     image()
@@ -192,7 +192,7 @@ def animate_enemies_missile():
                     game.stop_animation()
                     game.start = False
 
-                    # On vérifie le score
+                    # On vÃ©rifie le score
                     SaveMeilleurScore(game.score)
 
 
@@ -205,8 +205,8 @@ def image():
     canvas.create_image(320, 240, image=photo)
 
     
-# Cette fonction va permettre de gérer le tir du canon
-# ainsi que les collisions avec les cibles situées en
+# Cette fonction va permettre de gÃ©rer le tir du canon
+# ainsi que les collisions avec les cibles situÃ©es en
 # haut du canevas :)
 def launch_missile(event):
     global game
@@ -217,7 +217,7 @@ def launch_missile(event):
                 time.sleep(0.09)
 
 
-# Cette fonction va permettre d'animer l'obus tiré par
+# Cette fonction va permettre d'animer l'obus tirÃ© par
 # le canon mobile
 def animate_missile():
     global game
@@ -242,7 +242,7 @@ def animate_missile():
     
 
 # Les deux fonctions ci-dessous permettent
-# de diriger le canon mobile de gauche à droite
+# de diriger le canon mobile de gauche Ã  droite
 def right(event):
     global game
     if game.start and not game.paused:
@@ -267,9 +267,9 @@ def main_animation(itr):
 def pause(event):
     global game
 
-    # Si le jeu n'a pas commencé
-    # la fonction ne démarre pas
-    # Il en est de même si le joueur
+    # Si le jeu n'a pas commencÃ©
+    # la fonction ne dÃ©marre pas
+    # Il en est de mÃªme si le joueur
     # est mort :p
     if game.start and not game.student.lives == 0:
         game.pause_pressed()
@@ -341,8 +341,8 @@ class Loyer(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'Loyer'
-        self.text = ["Etes-vous dépassé par votre loyer ? ",
-                     "Pensez à faire une simulation d'une aide au logement auprès de la CAF. "
+        self.text = ["Etes-vous dÃ©passÃ© par votre loyer ? ",
+                     "Pensez Ã  faire une simulation d'une aide au logement auprÃ¨s de la CAF. "
                      "Visitez le site de la caf sur : http://www.caf.fr/"]
         self.img = PhotoImage(file='img/loyer_180x40.gif')
         self.set_body()
@@ -356,9 +356,9 @@ class Alcool(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'Alcool'
-        self.text = ["Passer des soirées top arrosées est dangereux pour votre assiduité.",
-                     "Si l'alcool vous mène la vie dure, "
-                     "bénéficiez d'une aide anonyme en appelant le 0 980 980 930."]
+        self.text = ["Passer des soirÃ©es top arrosÃ©es est dangereux pour votre assiduitÃ©.",
+                     "Si l'alcool vous mÃ¨ne la vie dure, "
+                     "bÃ©nÃ©ficiez d'une aide anonyme en appelant le 0 980 980 930."]
         self.img = PhotoImage(file='img/alcool_180x40.gif')
         self.set_body()
 
@@ -371,8 +371,8 @@ class Drogue(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'Drogue'
-        self.text = ["La consommation de drogue est dangereuse pour votre santé ...et votre diplôme. ",
-                     "Si vous n'arrivez pas à vous débarrasser de votre addiction. "
+        self.text = ["La consommation de drogue est dangereuse pour votre santÃ© ...et votre diplÃ´me. ",
+                     "Si vous n'arrivez pas Ã  vous dÃ©barrasser de votre addiction. "
                      "Faites-vous aider en appelant anonymement le 0 800 23 13 13"]
         self.img = PhotoImage(file='img/drogue_180x40.gif')
         self.set_body()
@@ -386,8 +386,8 @@ class Paperasse(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'Paperasse'
-        self.text = ["Les démarches administratives sont entrain de vous faire perdre la tête. ",
-                     "Visitez le nouveau site mis à disposition des étudiants qui regroupe toutes les démarches."
+        self.text = ["Les dÃ©marches administratives sont entrain de vous faire perdre la tÃªte. ",
+                     "Visitez le nouveau site mis Ã  disposition des Ã©tudiants qui regroupe toutes les dÃ©marches."
                      "https://www.etudiant.gouv.fr/"]
         self.img = PhotoImage(file='img/paperasse_180x40.gif')
         self.set_body()
@@ -401,8 +401,8 @@ class MST(Enemy):
     def __init__(self):
         super().__init__()
         self.type = 'MST'
-        self.text = ["N'oubliez jamais de sortir protégé !",
-                     "En cas de doutes, faites-vous dépister !"
+        self.text = ["N'oubliez jamais de sortir protÃ©gÃ© !",
+                     "En cas de doutes, faites-vous dÃ©pister !"
                      "Renseignez-vous sur https://www.sida-info-service.org/ "]
         self.img = PhotoImage(file='img/mst_180x40.gif')
         self.set_body()
@@ -488,10 +488,9 @@ class Game:
         self.missiles = []
         self.enemies = []
         self.enemies_missile = []
-        for _ in range(NB_START_ENEMIES):
-            self.enemies.append(Loyer())
+        self.generate_enemies()
 
-        # On efface tout à l'écran
+        # On efface tout Ã  l'Ã©cran
         background = PhotoImage(file='earth.gif')
         canvas.create_image(240, 320, image=background)
 
@@ -502,6 +501,13 @@ class Game:
         self.paused = False
         self.stop_animations = False
         self.launch_main_animation()
+
+    def generate_enemies(self):
+        self.enemies.append(Loyer())
+        self.enemies.append(MST())
+        self.enemies.append(Paperasse())
+        self.enemies.append(Alcool())
+        self.enemies.append(Drogue())
 
     def launch_main_animation(self):
         self.itr += 1
@@ -542,19 +548,19 @@ if __name__ == "__main__":
     ENEMIES_MISSILE_DY = 3
     MISSILE_DY = 10
 
-    # Création de la fenêtre principale
+    # CrÃ©ation de la fenÃªtre principale
 
     root = Tk()
 
-    # Titre de la fenêtre
+    # Titre de la fenÃªtre
 
     root.title('University Invaders')
 
-    # Définition du canevas ( Ecran de jeu )
+    # DÃ©finition du canevas ( Ecran de jeu )
 
     canvas = Canvas(root, width=WIDTH, height=HEIGHT, bg='black')
 
-    # Définition des touches qui vont permettre
+    # DÃ©finition des touches qui vont permettre
     # de diriger le canon mobile
 
     canvas.bind_all("<Right>", right)
@@ -565,10 +571,10 @@ if __name__ == "__main__":
     canvas.grid(row=1, column=0, columnspan=2, rowspan=3)
 
     # Installation d'une image de fond
-    # pour être plus dans l'ambiance 8)
+    # pour Ãªtre plus dans l'ambiance 8)
 
 
-    # Définition des boutons
+    # DÃ©finition des boutons
 
     # Ce bouton permet de commencer une nouvelle partie
 
@@ -587,10 +593,10 @@ if __name__ == "__main__":
     afficherScore = []
 
     # Cette variable va permettre de suspendre certaines
-    # fonctions durant l'affichage de l'écran de présentation
+    # fonctions durant l'affichage de l'Ã©cran de prÃ©sentation
 
     # Si le fichier contenant les scores n'existe pas
-    # on le crée avec comme valeur de départ ==> 0
+    # on le crÃ©e avec comme valeur de dÃ©part ==> 0
 
     if existe('HighScore')==0:
         FichierScore=open('HighScore', 'w')
@@ -599,11 +605,11 @@ if __name__ == "__main__":
 
     game = Game()
 
-    # On affiche l'écran de présentation du jeu
+    # On affiche l'Ã©cran de prÃ©sentation du jeu
 
     EcranDePresentation()
 
-    # On met le gestionnaire d'événements en route
+    # On met le gestionnaire d'Ã©vÃ©nements en route
 
     root.mainloop()
 

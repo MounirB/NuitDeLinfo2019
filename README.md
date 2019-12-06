@@ -35,3 +35,9 @@ Un jeu plus interactif pourrait être développé et cela sur plusieurs aspects 
 * L’idée à la base était que les aides/conseils viennent avec des bonus. L’utilisateur doit alors attraper des bonus et découvrir au fur et à mesure leur utilité, chaque aide permettant de se prémunir contre un risque particulier.
 * L’intégration de messages plus interactifs, qui ouvriraient une fenêtre directement dans le jeu et proposeraient des liens directs vers les services proposés. 
 * Un jeu un peu plus dynamique (mouvement des « ennemis », facultés spéciales, Boss), qui ressemblerait donc plus au Space Invaders que tout le monde connaît. Ceci pourrait aussi intégrait des petites astuces sur la vie sur le campus, mais pas des messages important, le but étant tout de même ces derniers touchent le plus grand nombre.
+
+Requirements
+-----------------------------
+Si vous souhaitez exécuter ce code, seul la librairie tk est nécessaire, avec au choix :
+* `pip install tk`
+* `conda install -c anaconda tk`

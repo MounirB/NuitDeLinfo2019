@@ -4,7 +4,7 @@ par l'équipe « Les 3 Mousquethesards »
 
 Pourquoi un serious game ?
 -------------------
-L’objectif est de permettre aux étudiants de s’intéresser aux différentes options qui leurs sont proposer. Une approche ludique peut permettre d’aborder plus facilement un sujet qui est souvent peu abordé entre étudiants, mais qui touche tout de même beaucoup d’étudiants à un degré plus ou moins élevé.
+L’objectif est de permettre aux étudiants de s’intéresser aux différentes options qui leur sont proposées. Une approche ludique peut permettre d’aborder plus facilement un sujet qui est souvent peu abordé entre étudiants, mais qui touche tout de même beaucoup d’étudiants à un degré plus ou moins élevé.
 
 
 Le principe d’University’nvaders
@@ -13,7 +13,7 @@ Le principe est simple, on incarne un étudiant qui doit se battre contre les d�
 
 ![im1](https://github.com/MounirB/NuitDeLinfo2019/blob/master/img/im1.png) 
 
-La seule arme dont il dispose c’est ses quelques livres de cours. En effet un étudiant est là pour étudié et devrait pouvoir consacrer une bonne partie de son temps à son se former pour acquérir de nouvelles compétences et connaissances.
+La seule arme dont il dispose c’est ses quelques livres de cours. En effet un étudiant est là pour étudier et devrait pouvoir consacrer une bonne partie de son temps à son se former pour acquérir de nouvelles compétences et connaissances.
 
 
 ![im2](https://github.com/MounirB/NuitDeLinfo2019/blob/master/img/im2.png) 
